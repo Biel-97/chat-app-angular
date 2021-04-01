@@ -1,0 +1,59 @@
+.public-Chat{
+  border: 1px solid black;
+  height: 100%;
+  width: 100%;
+}
+.Messages{
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.Messages > ul {
+  border: 1px solid blue;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Messages > ul> li {
+  list-style: none;
+  margin: 10px 5px;
+  display: flex;
+  height: 30px;
+  width: 100%;
+  align-items: center;
+
+}
+
+.myMessage {
+  justify-content: flex-end;
+  display: flex;
+  background: green;
+
+}
+.othersMessage{
+  justify-content: flex-start;
+  display: flex;
+  background: rgb(133, 133, 255);
+
+}
+
+.botMessage{
+  background: gray;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.chat-bottom{
+  width: 100%;
+  margin: 20px 5px;
+}
+.chat-bottom > input {
+  width: calc(100% - 100px);
+}
+.chat-bottom > button {
+  width: 80px;
+}

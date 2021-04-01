@@ -1,0 +1,91 @@
+.private-chat {
+  height: 100%;
+  background: #E4DCD9;
+  display: flex;
+  flex-direction: column;
+}
+.chat-header {
+  height: 80px;
+  background: #EEEEEE;
+}
+.Messages{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #E4DCD9;
+  height: calc(100% - 130px);
+}
+.Messages > ul {
+  width: 100%;
+  min-width: 500px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 5%;
+}
+.Messages > ul> li {
+  list-style: none;
+  margin: 10px 5px;
+  display: flex;
+  height: 30px;
+  align-items: center;
+  max-width: 45%;
+  min-width: 100px;
+  height: auto;
+  padding: 5px;
+  text-align: justify;
+
+}
+
+.myMessage {
+  display: flex;
+  align-self: flex-end;
+  background: #DCF9C4;
+  justify-content: space-between;
+}
+.myMessage > span:first-child{
+  /* background: red; */
+  margin-right:  5px;
+}
+.othersMessage{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  background: white;
+}
+.othersMessage > span {
+  display: flex;
+  align-self: flex-start;
+
+}
+.othersMessage > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.othersMessage .time-message, .myMessage .time-message {
+  display: flex;
+  align-self: flex-end;
+  margin-bottom: -5px;
+}
+.botMessage{
+  background: #E0F2FB;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.chat-bottom{
+  width: 100%;
+  /* margin: 20px 5px; */
+}
+.chat-bottom > input {
+  width: 100%;
+  height: 50px;
+}
+.chat-bottom > button {
+  width: 80px;
+}

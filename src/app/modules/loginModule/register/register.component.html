@@ -1,0 +1,25 @@
+<div>
+  <h1>Reg</h1>
+  <button (click)="loginPage()">Login</button>
+  <form action="">
+    <label for="" >email</label>
+    <input type="email"#email>
+
+    <label for="" >name</label>
+    <input type="text" #name>
+
+    <label for="" >password</label>
+    <input type="password" #password>
+
+    <label for="" >repeat password</label>
+    <input type="password" #password2>
+
+  </form>
+  <button (click)="register({
+    email: email.value,
+    name: name.value,
+    password: password.value,
+    password2: password2.value
+    })">Regster</button>
+
+</div>

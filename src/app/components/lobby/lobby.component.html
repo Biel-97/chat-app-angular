@@ -1,0 +1,38 @@
+<div class="lobby">
+  <div class="column">
+    <div class="top-buttons">
+      <app-menu></app-menu>
+    </div>
+    <div class="chats">
+      <div *ngIf="newgroup">
+        <app-new-group></app-new-group>
+      </div>
+
+      <div *ngIf="contacts">
+        <button class="back" (click)="cancelNewGroup()">
+          <mat-icon>keyboard_backspace</mat-icon>
+          <span>Back</span>
+        </button>
+
+        <div class="addContactButton" (click)="openDialogForm()">
+          <mat-icon class="addContact" >person_add</mat-icon>
+          <span>New Contact</span>
+        </div>
+
+        <ul>
+          <li *ngFor="let contact of contactsList">
+            {{ contact.name }}
+          </li>
+        </ul>
+      </div>
+
+      <div *ngIf="getrooms">
+        <li *ngFor="let salas of rooms" [routerLink]="['/lobby/', salas.name]" (click)="getChatMessages(salas.Room_id)">
+            {{ salas.name }}
+        </li>
+      </div>
+
+    </div>
+  </div>
+  <router-outlet class="router-outlet"></router-outlet>
+</div>

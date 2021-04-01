@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>New Contact</h1>
+
+<!-- <form class="newContact">
+  <label for="">Nome*</label>
+  <input type="text">
+  <label for="">Email*</label>
+  <input type="email">
+</form> -->
+
+<form class="newContact">
+  <h1>{{ contactStatus }}</h1>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Email*</mat-label>
+    <input matInput placeholder="ex:. Gabriel.pso@gmail.com" #email/>
+  </mat-form-field>
+</form>
+
+<div mat-dialog-actions class="newContactButtons">
+  <button mat-raised-button color="primary" cdkFocusInitial (click)="addContact( email)">Add</button>
+
+  <button mat-raised-button color="warn" mat-button (click)="cancelDialog()">Cancel</button>
+
+</div>

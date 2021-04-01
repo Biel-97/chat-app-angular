@@ -1,0 +1,63 @@
+.newGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.back {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  height: 50px;
+  padding: 15px;
+  background: rgb(81, 81, 107);
+  border: none;
+  color: white;
+}
+.back > span {
+  margin: 15px;
+}
+
+.groupImg {
+  border-radius: 100%;
+  background: gray;
+  height: 200px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  margin: 40px 0px;
+}
+.groupImg {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.desc-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+
+
+}
+.desc-group >  span {
+  margin: 5px;
+  margin-left: 20px;
+}
+.newGroup > span{
+  margin-left: 20px;
+
+}
+
+.example-full-width{
+  display: none;
+}
+.description {
+  display: flex;
+  flex-direction: column;
+}
+.description > div {
+  background: gray;
+  display: flex;
+}

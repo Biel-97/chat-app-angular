@@ -1,0 +1,15 @@
+<div>
+  <h1>Log</h1>
+  <button (click)="registerPage()">Register</button>
+  <form action="">
+    <label for="" >email</label>
+    <input type="email"#email>
+    <label for="" >password</label>
+    <input type="password" #password>
+  </form>
+  <button (click)="login({
+    email: email.value,
+    password: password.value}
+    )">Login</button>
+
+</div>

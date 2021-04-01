@@ -1,0 +1,66 @@
+<div class="newGroup">
+  <button class="back" (click)="cancelNewGroup()">
+    <mat-icon>keyboard_backspace</mat-icon>
+    <span> Add group participants</span>
+  </button>
+
+  <div *ngIf="!goNextStep">
+    <div class="participants">
+      <li *ngFor="let item of participantsList">
+        <div (click)="removeParticipants(item.name, item.email)">
+          <span>{{ item.name }}</span>
+          <span><mat-icon>remove</mat-icon></span>
+        </div>
+      </li>
+    </div>
+    <hr />
+
+    <div class="contactList">
+      <li *ngFor="let participants of contactList">
+        <div (click)="addParticipants(participants.name, participants.email)">
+          <span> {{ participants.name }}</span>
+          <span> <mat-icon>add</mat-icon> </span>
+        </div>
+      </li>
+    </div>
+    <div>
+      <mat-icon (click)="nextStep()">keyboard_arrow_right</mat-icon>
+    </div>
+  </div>
+
+  <div class="group-details" *ngIf="goNextStep">
+    <div class="groupImg">
+      <span><mat-icon aria-hidden="false">camera_enhance </mat-icon> </span>
+      <span>Add Group</span>
+      <span>ICON</span>
+    </div>
+    <div class="desc-group">
+      <div class="description">
+        <h4>Descrition</h4>
+
+          <mat-label>Description</mat-label>
+          <input />
+
+        <div>
+          <span>
+            {{ description }}
+          </span>
+          <span (click)="changeDescription()">
+            <mat-icon aria-hidden="false"> create </mat-icon>
+          </span>
+        </div>
+      </div>
+      <span>Created today ay 00:00</span>
+    </div>
+    <span>
+      <span>Mute Notifications</span>
+      <span>
+        <mat-icon aria-hidden="false" (click)="checkBox(true)" *ngIf="MuteStatus"> check_box </mat-icon>
+        <mat-icon aria-hidden="false" (click)="checkBox(false)" *ngIf="!MuteStatus"> check_box_outline_blank </mat-icon>
+      </span>
+    </span>
+    <div (click)="newGroupDone()">
+      <mat-icon>group_add</mat-icon>
+    </div>
+  </div>
+</div>
