@@ -14,15 +14,16 @@ export class CallComponentsService {
   private _newGroup: string = 'http://localhost:8080/newGroup';
   private _groupMessages: string = 'http://localhost:8080/groupMessages';
 
-  _showNewGroup = new EventEmitter<boolean>();
-  _showContacts = new EventEmitter<boolean>();
-  _showRooms = new EventEmitter<boolean>();
-  _room_Id = new EventEmitter<string>();
+  showNewGroup = new EventEmitter<boolean>();
+  showContacts = new EventEmitter<boolean>();
+  showRooms = new EventEmitter<boolean>();
+  room_Id = new EventEmitter<string>();
+  room_Name = new EventEmitter<boolean>();
 
+  user_Name:string
 
 
   callContacts(){
-    // this._showContacts.emit(true)
     return this._http.post(this._root, {
       token: `Bearer ${localStorage.token}`,
       id: localStorage.User_id,
@@ -47,7 +48,6 @@ export class CallComponentsService {
   }
 
   addNewGroup(room: any){
-
     return this._http.post(this._newGroup, {
       token: `Bearer ${localStorage.token}`,
       id: localStorage.User_id,
@@ -61,6 +61,10 @@ export class CallComponentsService {
       chatId: id
     })
 
+  }
+
+  getChatid(id: string){
+    this.room_Id.emit(id)
   }
 
 }

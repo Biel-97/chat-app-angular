@@ -1,16 +1,18 @@
 <div class="public-Chat">
+  <div class="Messages">
+    <ul>
+      <li class="myMessage"><span>Teste apenas </span><div><span>20:00</span><span>Eu Mesmo</span></div></li>
+      <li class="othersMessage"><span>Teste apenas2</span> <div><span>20:00</span><span>Ozoto</span></div></li>
+      <li class="botMessage"> <span>User JalimRabei Connected</span> <div><span>20:00</span></div></li>
+      <li class="othersMessage"><span>Teste apenas4</span> <div><span>20:00</span><span>Ozoto</span></div></li>
+
+      <li *ngFor="let msg of msgs">
+        {{ msg.UserName }}
+        {{ msg.message }}
+      </li>
+    </ul>
+  </div>
   <form action="">
-    <div class="Messages">
-      <ul>
-        <li class="myMessage"><span>Teste apenas </span><div><span>20:00</span><span>Eu Mesmo</span></div></li>
-        <li class="othersMessage"><span>Teste apenas2</span> <div><span>20:00</span><span>Ozoto</span></div></li>
-        <li class="botMessage"> <span>User JalimRabei Connected</span> <div><span>20:00</span></div></li>
-        <li class="othersMessage"><span>Teste apenas4</span> <div><span>20:00</span><span>Ozoto</span></div></li>
-        <li *ngFor="let msg of msgs">
-          {{ msg }}
-        </li>
-      </ul>
-    </div>
     <div class="chat-bottom">
       <input type="text" placeholder="Type a new message here..." #message>
       <button (click)="sendMessage($event, message)">Send</button>

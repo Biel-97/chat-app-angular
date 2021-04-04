@@ -2,47 +2,112 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+}
+.group-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.tittle, .description {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0px 30px;
+  height: 40px;
+}
+.tittle > i, .description > i {
+  position: absolute;
+  padding: 2px;
+  bottom: 0px;
+  right: 0px;
+}
+.tittle > input, .description > input{
+  text-align: center;
+}
+.tittle > span, .description > span {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.mute {
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  align-items: center;
+  padding-left: 20px;
+  height: 30px;
+}
+.mute > span {
+  margin-right: 15px;
+}
+.mute > i {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 .back {
   display: flex;
-  justify-content: start;
   align-items: center;
   height: 50px;
-  padding: 15px;
-  background: rgb(81, 81, 107);
+  padding: 15px 15px 15px 0px;
+  margin-left: 0px;
+  background: rgb(0, 169, 167);
   border: none;
   color: white;
 }
-.back > span {
+.back > i {
+  height: 50px;
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 200ms;
+}
+.back > i:hover {
+  background: rgb(255, 255, 255, 0.1);
+}
+.back > h3 {
   margin: 15px;
+  font-size: 18px;
 }
 
 .groupImg {
   border-radius: 100%;
   background: gray;
+  color: white;
   height: 200px;
   width: 200px;
   display: flex;
-  justify-content: center;
-  align-self: center;
-  margin: 40px 0px;
-}
-.groupImg {
-  display: flex;
   flex-direction: column;
   justify-content: center;
+  align-self: center;
   align-items: center;
+  margin: 40px 0px;
 }
+
 .desc-group {
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
 
-
+}
+.tittle > span {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .desc-group >  span {
-  margin: 5px;
+  display: flex;
+  justify-content: flex-start;
   margin-left: 20px;
 }
 .newGroup > span{
@@ -53,11 +118,123 @@
 .example-full-width{
   display: none;
 }
-.description {
+
+.col {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+.col > h2{
+  margin-left: 20px;
+}
+
+.box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0px 0px 5px 0px;
+  box-shadow: rgb(0, 0, 0, 0.4) 2px 2px 10px;
+}
+.nextStepButton {
+  border-radius: 100%;
+  width: 50px;
+  height: 50px;
+  color: white;
+  background: rgb(0, 128, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 30px;
+  margin-right: 30px;
+  align-self: flex-end;
+
+}
+.nextStepButton:hover {
+  background: rgb(0, 128, 0, 0.8);
+}
+.groupsconfig {
   display: flex;
   flex-direction: column;
 }
-.description > div {
-  background: gray;
+.contactList {
   display: flex;
+  flex-direction: column;
+  justify-content: start;
+  width: 100%;
+  cursor: pointer;
+}
+
+.contactList > li {
+  transition: 200ms;
+  width: 100%;
+  display: flex;
+}
+.contactList > li:hover  {
+  background: rgb(0, 0, 0, 0.1);
+
+}
+.contactList > li > div {
+  width: 80%;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.15);
+  padding-left: 20px;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  height: 60px;
+}
+.contactList > li > div> span{
+  display: flex;
+  align-items: center;
+}
+.contactList > li > div> span:last-child{
+  margin-left: 20px;
+}
+.contactList > li > div> span:first-child{
+  color: gray;
+}
+
+.contactList > span {
+  color: rgb(81, 143, 142);
+  font-weight: 900;
+  margin-left: 30px;
+  font-size: 16px;
+}
+.userIcon > .mat-icon {
+  height: 50px;
+  font-size: 50px;
+  margin-right:  15px;
+}
+
+.participants {
+  border-bottom: 1px solid rgb(0, 0, 0, 0.3);
+  margin-bottom: 50px;
+}
+.participants > li {
+  /* margin: 5px 20px; */
+  display: flex;
+}
+.participants > li  > div {
+  background: rgb(205, 205, 255);
+  margin: 5px 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 40px;
+  cursor: pointer;
+}
+.participants > li  > div:hover {
+  background: rgb(205, 205, 255, 0.8);
+}
+
+.participants > li  > div > span:first-child {
+  margin-left: 15px;
+}
+.participants > li  > div > span {
+  margin: 0px 2px;
+}
+.participants > li  > div > span >.mat-icon {
+  display: flex;
+  justify-content: center;
 }

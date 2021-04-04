@@ -1,12 +1,14 @@
-<i>
-  <mat-icon (click)="getContacts()">speaker_notes</mat-icon>
-</i>
-<i mat-button [matMenuTriggerFor]="beforeMenu">
-  <mat-icon>more_vert</mat-icon>
-</i>
-<mat-menu #beforeMenu="matMenu" xPosition="before">
-  <button mat-menu-item  (click)="createNewGroup()">Create group</button>
-  <button mat-menu-item>Settings</button>
-</mat-menu>
+<div class="buttons">
+  <i>
+    <mat-icon (click)="getContacts()">speaker_notes</mat-icon>
+  </i>
+  <i mat-button [matMenuTriggerFor]="beforeMenu">
+    <mat-icon>more_vert</mat-icon>
+  </i>
+  <mat-menu #beforeMenu="matMenu" xPosition="before">
+    <button mat-menu-item  (click)="createNewGroup()">Create group</button>
+    <button mat-menu-item>Settings</button>
+  </mat-menu>
 
 
+</div>

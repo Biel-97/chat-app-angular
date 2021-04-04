@@ -3,7 +3,7 @@
     <div class="top-buttons">
       <app-menu></app-menu>
     </div>
-    <div class="chats">
+    <div class="newChats">
       <div *ngIf="newgroup">
         <app-new-group></app-new-group>
       </div>
@@ -26,9 +26,10 @@
         </ul>
       </div>
 
-      <div *ngIf="getrooms">
-        <li *ngFor="let salas of rooms" [routerLink]="['/lobby/', salas.name]" (click)="getChatMessages(salas.Room_id)">
-            {{ salas.name }}
+      <div *ngIf="getChats" class="chats">
+        <h3>CHATS</h3>
+        <li *ngFor="let salas of rooms" [routerLink]="['/lobby/', salas.name]" (click)="getChatid(salas.Room_id)" class="chat">
+          <span> {{ salas.name }} </span>
         </li>
       </div>
 

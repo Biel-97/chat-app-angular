@@ -1,6 +1,7 @@
 import { CallComponentsService } from './../../shared/call-components.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { AuthenticateService } from 'src/app/shared/authenticate.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-group',
@@ -10,14 +11,22 @@ import { AuthenticateService } from 'src/app/shared/authenticate.service';
 export class NewGroupComponent implements OnInit {
   constructor(
     private _callComponents: CallComponentsService,
-    private _auth: AuthenticateService
+    private _auth: AuthenticateService,
+    private _route: Router
   ) {}
 
-  contactList: object;
+  contactList: any
   participantsList = [];
-  goNextStep: boolean;
-  description: string = 'Add a group description';
+  goNextStep: boolean = false;
   MuteStatus: boolean = false;
+  _editName:boolean = false
+  _editDescription: boolean = false
+
+
+  groupDetails: any = {
+    roomName: 'tittle ',
+    description: 'Group description.',
+  };
 
   ngOnInit(): void {
     this._callComponents.getContacts().subscribe((data: any) => {
@@ -26,9 +35,9 @@ export class NewGroupComponent implements OnInit {
   }
 
   cancelNewGroup() {
-    this._callComponents._showRooms.emit(true);
-    this._callComponents._showContacts.emit(false);
-    this._callComponents._showNewGroup.emit(false);
+    this._callComponents.showRooms.emit(true);
+    this._callComponents.showContacts.emit(false);
+    this._callComponents.showNewGroup.emit(false);
     this.goNextStep = false;
     for (var i = 0; i <= this.participantsList.length; i++) {
       this.participantsList.pop();
@@ -42,6 +51,12 @@ export class NewGroupComponent implements OnInit {
       }
     }
     this.participantsList.push({ name, email });
+    for(var i = 0; i < this.contactList.length; i++){
+      if(this.contactList[i].email == email){
+        this.contactList.splice(i, 1)
+        // console.log(this.contactList[i])
+      }
+    }
   }
 
   removeParticipants(name: string, email: string) {
@@ -50,6 +65,7 @@ export class NewGroupComponent implements OnInit {
         this.participantsList.splice(i, 1);
       }
     }
+    this.contactList.push({ name, email })
   }
 
   nextStep() {
@@ -57,14 +73,21 @@ export class NewGroupComponent implements OnInit {
       this.goNextStep = true;
     }
   }
-  changeDescription() {}
+
+  editTitle(){
+    this._editName = !this._editName
+  }
+  editDescription(){
+    this._editDescription = !this._editDescription
+
+  }
 
   checkBox(status: boolean) {
     this.MuteStatus = !status;
   }
 
-  newGroupDone() {
 
+  newGroupDone() {
     this._auth.authenticate().subscribe((user: any) => {
       this.participantsList.push({
         name: user.name,
@@ -72,31 +95,34 @@ export class NewGroupComponent implements OnInit {
         status: 'administrator',
       });
 
-      let room = {
-        roomName: 'Group test',
-        creator: {
-          name: user.name,
-          email: user.email,
-        },
-
-        participants: this.participantsList,
-        description: 'Group description',
-      };
-      this._callComponents.addNewGroup(room).subscribe((data: any) => {
+      this.groupDetails.participants = this.participantsList;
+      this.groupDetails.creator = { name: user.name, email: user.email };
+      console.log(this.groupDetails)
+      this._callComponents.addNewGroup(this.groupDetails).subscribe((data: any) => {
         if (data.error) {
-          console.log(data.error);
+          alert(data.error);
           this.back();
         } else {
           this.back();
+          this._route.navigate(['/lobby'])
         }
       });
     });
   }
+
   back() {
     this.participantsList = [];
+    this.groupDetails = {}
+    this.groupDetails = {
+      roomName: 'tittle',
+      description: 'Group description.',
+    }
     this.goNextStep = false;
-    this._callComponents._showRooms.emit(true);
-    this._callComponents._showContacts.emit(false);
-    this._callComponents._showNewGroup.emit(false);
+    this._callComponents.showRooms.emit(true);
+    this._callComponents.showContacts.emit(false);
+    this._callComponents.showNewGroup.emit(false);
+  }
+  addMoreParticipants(){
+    this.goNextStep = false
   }
 }

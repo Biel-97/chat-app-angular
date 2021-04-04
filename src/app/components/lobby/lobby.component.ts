@@ -15,7 +15,7 @@ export class LobbyComponent implements OnInit {
 
   newgroup: boolean = false;
   contacts: boolean = false;
-  getrooms: boolean = true;
+  getChats: boolean = true;
 
   constructor(
     private _auth: AuthenticateService,
@@ -28,20 +28,22 @@ export class LobbyComponent implements OnInit {
       this._auth.showHeaderEmitter.emit(false);
     }, 0);
 
-    this._callComponents._showNewGroup.subscribe((show) => {
+    this._callComponents.showNewGroup.subscribe((show) => {
       this.newgroup = show;
     });
-    this._callComponents._showContacts.subscribe((show) => {
+    this._callComponents.showContacts.subscribe((show) => {
       this.contacts = show;
 
     });
-    this._callComponents._showRooms.subscribe((show) => {
-      this.getrooms = show;
+    this._callComponents.showRooms.subscribe((show) => {
+      this.getUserChats()
+      this.getChats = show;
     });
     this._callComponents.getContacts().subscribe((data: any) => {
       this.contactsList = data.User.contacts
     })
     this.getUserChats()
+
   }
 
   openDialogForm(): void {
@@ -50,19 +52,27 @@ export class LobbyComponent implements OnInit {
     });
   }
   cancelNewGroup(){
-    this._callComponents._showRooms.emit(true)
-    this._callComponents._showContacts.emit(false)
-    this._callComponents._showNewGroup.emit(false)
+    this._callComponents.showRooms.emit(true)
+    this._callComponents.showContacts.emit(false)
+    this._callComponents.showNewGroup.emit(false)
   }
 
   getUserChats(){
     this._auth.authenticate().subscribe((data: any) => {
-      this.rooms = data.Rooms
+      if(data.error){
+        localStorage.clear()
+      }else{
+        console.log(data)
+        this.rooms = data.Rooms
+        this._callComponents.user_Name = data.name
+      }
     })
   }
 
-  getChatMessages(id: string){
-
-    this._callComponents._room_Id.emit(id)
+  getChatid(id: string){
+    setTimeout(() => {
+      this._callComponents.getChatid(id)
+    }, 0)
   }
+
 }

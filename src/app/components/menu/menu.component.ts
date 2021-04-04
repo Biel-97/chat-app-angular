@@ -18,15 +18,15 @@ export class MenuComponent implements OnInit {
 
 
   createNewGroup(){
-    this._callComponents._showRooms.emit(false)
-    this._callComponents._showContacts.emit(false)
-    this._callComponents._showNewGroup.emit(true)
+    this._callComponents.showRooms.emit(false)
+    this._callComponents.showContacts.emit(false)
+    this._callComponents.showNewGroup.emit(true)
   }
 
   getContacts(){
-    this._callComponents._showRooms.emit(false)
-    this._callComponents._showNewGroup.emit(false)
-    this._callComponents._showContacts.emit(true)
+    this._callComponents.showRooms.emit(false)
+    this._callComponents.showNewGroup.emit(false)
+    this._callComponents.showContacts.emit(true)
 
   }
 }

@@ -1,38 +1,21 @@
 <div class="private-chat">
-  <div class="chat-header">a</div>
+  <div class="chat-header">{{ this._userInfo.roomName }}</div>
   <div class="Messages">
     <ul>
-      <li class="myMessage">
-        <span>Teste apenas </span>
-          <span class="time-message">20:00</span>
-      </li>
-      <li class="othersMessage">
-        <span>Ozoto</span>
-        <div>
-          <span>Teste apenas4Teste apenas4Teste apenas4Teste apenas4</span>
-          <span class="time-message">20:00</span>
-        </div>
-      </li>
-      <li class="botMessage">
-        <span>User JalimRabei Connected</span>
-        <span class="time-message">20:00</span>
+      <li *ngFor="let msg of chatMessages"
+       [class.myMessage]="msg.id == myid"
+       [class.othersMessage]="(msg.id == myid) == false"
+       >
+        {{ msg.message }}
       </li>
 
-      <li class="othersMessage">
-        <span>Ozoto</span>
-        <div>
-          <span>Teste apenas4 Tes te apen as4 Te ste apen as4 Teste apenas4 </span>
-          <span class="time-message">20:00</span>
-        </div>
-      </li>
-
-      <!-- <li *ngFor="let msg of msgs">
-          {{ msg }}
-        </li> -->
     </ul>
   </div>
-  <div class="chat-bottom">
-    <input type="text" placeholder="Type a new message here..." #message />
-    <!-- <button (click)="sendMessage($event, message)">Send</button> -->
-  </div>
+  <form>
+
+    <div class="chat-bottom">
+      <input type="text" placeholder="Type a new message here..." #message />
+      <button (click)="sendMessage($event, message)">Send</button>
+    </div>
+  </form>
 </div>

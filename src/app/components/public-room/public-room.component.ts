@@ -1,5 +1,6 @@
 import { SocketService } from './../../shared/socket.service';
 import { Component, OnInit } from '@angular/core';
+import { AuthenticateService } from 'src/app/shared/authenticate.service';
 
 @Component({
   selector: 'app-public-room',
@@ -9,29 +10,35 @@ import { Component, OnInit } from '@angular/core';
 export class PublicRoomComponent implements OnInit {
 
   constructor(
-    private _socketIO: SocketService
+    private _socketIO: SocketService,
+    private _auth: AuthenticateService
   ) {}
 
   msgs=[]
 
-  initialTeste =  {name: 'Nome Generico', room: 'public'}
+  initialTeste:any =  { roomName: 'public'}
+
   ngOnInit(): void {
     this._socketIO.listen('new message').subscribe((data) => {
       console.log(data)
+      this.initialTeste.name = data.UserName
       this.msgs.push(data)
     })
 
     this._socketIO.emitEvent('joinRoom', this.initialTeste)
 
+    this._auth.authenticate().subscribe((data: any) => {
+      this.initialTeste.UserName = data.name
+    })
+
   }
 
   sendMessage(event:any, message:any){
     event.preventDefault()
-
-
     if(message.value !==''){
-      this._socketIO.emitPublic('new message' ,message.value)
-
+      this.initialTeste.message = message.value
+      this._socketIO.emitEvent('new message', this.initialTeste)
+      message.value =''
     }else{
       console.log('Message is empty')
     }

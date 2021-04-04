@@ -21,13 +21,13 @@ export class SocketService {
     })
   }
 
-  emitEvent(eventName: string, message:any): void{
-    this.socket_Client.emit(eventName, message)
+  emitEvent(eventName: string, data:any): void{
+    this.socket_Client.emit(eventName, data)
   }
 
 
-  emitPublic(eventName: string,  message:any): void{
-    this.socket_Client.emit(eventName, {room:'public', message})
+  emitPublic(eventName: string,  data:any): void{
+    this.socket_Client.emit(eventName, {room:'public', data})
   }
 
 

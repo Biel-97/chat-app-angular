@@ -9,6 +9,7 @@ import User from '../User';
 export class AuthenticateService implements OnInit {
   UserStatus: boolean;
   root: string = 'http://localhost:8080';
+  authRoom: string = 'http://localhost:8080/authRoom';
 
   showHeaderEmitter = new EventEmitter<boolean>();
 
@@ -49,6 +50,13 @@ export class AuthenticateService implements OnInit {
     return this._http.post(this.root, {
       token: `Bearer ${localStorage.token}`,
       id: localStorage.User_id,
+    })
+  }
+  authenticateRoom(roomId:string) {
+    return this._http.post(this.authRoom, {
+      token: `Bearer ${localStorage.token}`,
+      id: localStorage.User_id,
+      roomid: roomId
     })
   }
 

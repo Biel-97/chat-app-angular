@@ -25,7 +25,6 @@ export class AppComponent implements OnInit {
 
     this.authenticateService.showHeaderEmitter.subscribe(
       show => {
-        console.log(show)
         this.ShowHeader = show
       }
     )
