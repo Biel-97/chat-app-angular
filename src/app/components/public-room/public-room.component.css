@@ -1,59 +1,98 @@
-.public-Chat{
-  border: 1px solid black;
-  height: 100%;
-  width: 100%;
+.public-Chat {
+  height: calc(100% - 80px);
+  position: relative;
 }
-.Messages{
-  border: 1px solid red;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
-}
-.Messages > ul {
-  border: 1px solid blue;
-  width: 100%;
-  padding: 0;
+.Messages {
+  height: calc(100% - 100px);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  padding: 15px;
 }
-.Messages > ul> li {
+.Messages > li {
+  color: white;
+
   list-style: none;
   margin: 10px 5px;
   display: flex;
+  flex-direction: column;
   height: 30px;
-  width: 100%;
   align-items: center;
+  max-width: 45%;
+  min-width: 100px;
+  height: auto;
+  padding: 5px;
+  text-align: justify;
+
 
 }
 
 .myMessage {
-  justify-content: flex-end;
+  background: rgb(5, 148, 48);
   display: flex;
-  background: green;
+  align-self: flex-end;
+  border-bottom-right-radius: 15px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px ;
+}
+.myMessage > span:first-child{
+  margin-bottom: 3px;
+  margin-right: 5px;
+  align-self: flex-end;
 
 }
-.othersMessage{
-  justify-content: flex-start;
-  display: flex;
-  background: rgb(133, 133, 255);
-
+.myMessage > span:last-child{
+  margin-right: 10px;
+  align-self: flex-end;
+}
+.othersMessage {
+  background: rgb(36, 36, 82);
+  align-self: flex-start;
+  border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px ;
+}
+.othersMessage > span:first-child{
+  margin-bottom: 3px;
+  align-self: flex-start;
 }
 
-.botMessage{
-  background: gray;
+.chat-form {
   width: 100%;
+  height: 100px;
   display: flex;
   justify-content: center;
+  padding: 15px;
 }
-.chat-bottom{
-  width: 100%;
-  margin: 20px 5px;
+.chat-form > input {
+  width: 90%;
+  height: 100%;
+  margin: 0;
+  padding: 5px;
+  font-size: 20px;
 }
-.chat-bottom > input {
-  width: calc(100% - 100px);
+.chat-form > button {
+  width: 10%;
+  height: 100%;
+  background: rgb(0, 0, 0, 0.9);
+  border: none;
 }
-.chat-bottom > button {
-  width: 80px;
+.chat-form > button .mat-icon {
+  color: white;
+}
+
+.chat-form > input:focus {
+  outline: none;
+}
+.BotMessage {
+  background: rgb(43, 43, 43);
+  align-self: center;
+  border-radius: 15px;
+  padding: 10px 25px!important;
+}
+.BotMessage > span:first-child {
+  align-self: center;
+}
+.BotMessage > span {
+  margin: 5px;
 }

@@ -15,20 +15,19 @@ export class PublicRoomComponent implements OnInit {
   ) {}
 
   msgs=[]
-
-  initialTeste:any =  { roomName: 'public'}
+  userInfo:any =  { roomName: 'public'}
 
   ngOnInit(): void {
     this._socketIO.listen('new message').subscribe((data) => {
-      console.log(data)
-      this.initialTeste.name = data.UserName
       this.msgs.push(data)
     })
 
-    this._socketIO.emitEvent('joinRoom', this.initialTeste)
+    // this._socketIO.emitEvent('joinRoom', this.userInfo)
 
     this._auth.authenticate().subscribe((data: any) => {
-      this.initialTeste.UserName = data.name
+      this.userInfo.UserName = data.name
+      this.userInfo.email = data.email
+      this.userInfo.id = data._id
     })
 
   }
@@ -36,8 +35,8 @@ export class PublicRoomComponent implements OnInit {
   sendMessage(event:any, message:any){
     event.preventDefault()
     if(message.value !==''){
-      this.initialTeste.message = message.value
-      this._socketIO.emitEvent('new message', this.initialTeste)
+      this.userInfo.message = message.value
+      this._socketIO.emitEvent('new message', this.userInfo)
       message.value =''
     }else{
       console.log('Message is empty')

@@ -1,0 +1,63 @@
+.home {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.home > span {
+  width: 40%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  font-weight: 900;
+  color: white;
+  font-size: 25px;
+  min-width: 500px;
+  margin: 15px 0px;
+ display: flex;
+  flex-direction: column;
+  transition: 200ms;
+  cursor: pointer;
+  box-shadow: 10px 10px 10px rgb(0, 0, 0, 0.3);
+}
+
+.home > span > span:last-child {
+  margin: 0;
+  margin-top: 20px;
+  /* color: red; */
+  border: 5px solid white;
+
+  border-radius: 100%;
+  padding: 2px;
+}
+.home > span > span:last-child > .mat-icon {
+  font-size: 50px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.home > span:first-child {
+  background:  rgb(100, 100, 255);
+
+}
+.home > span:last-child {
+  background: rgb(133, 253, 183);
+}
+.home > span:last-child > span:last-child {
+}
+
+.home > span:first-child:hover{
+  background: rgb(100, 100, 255, 0.9);
+
+
+}
+.home > span:last-child:hover {
+  background: rgb(133, 253, 183,0.9);
+}
+

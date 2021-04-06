@@ -14,7 +14,7 @@ export class LobbyComponent implements OnInit {
   contactsList: object[]
 
   newgroup: boolean = false;
-  contacts: boolean = false;
+  contacts: boolean = true;
   getChats: boolean = true;
 
   constructor(
@@ -41,6 +41,7 @@ export class LobbyComponent implements OnInit {
     });
     this._callComponents.getContacts().subscribe((data: any) => {
       this.contactsList = data.User.contacts
+      console.log(data.User.contacts)
     })
     this.getUserChats()
 
@@ -73,6 +74,10 @@ export class LobbyComponent implements OnInit {
     setTimeout(() => {
       this._callComponents.getChatid(id)
     }, 0)
+  }
+
+  createChat(contactID){
+    console.log(contactID)
   }
 
 }

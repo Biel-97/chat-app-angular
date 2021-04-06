@@ -28,9 +28,7 @@ export class PrivateRoomComponent implements OnInit {
     this._callComponents.room_Id.subscribe((room_ID) => {
       this.getChatMessages(room_ID);
       this._userInfo.room_ID = room_ID;
-      this._socketIO.emitEvent('joinRoom', this._userInfo);
     });
-
     this._socketIO.listen('new message').subscribe((data: any) => {
       this.chatMessages.push(data);
       if (data.User_ID == localStorage.getItem('User_id')) {
@@ -44,6 +42,7 @@ export class PrivateRoomComponent implements OnInit {
 
       if(this._userInfo.roomName != data['id']){
         this._socketIO.emitEvent('exitRoom', this._userInfo);
+        this._socketIO.emitEvent('joinRoom', this._userInfo);
 
         this._userInfo.roomName = data['id'];
       }

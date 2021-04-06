@@ -1,25 +1,41 @@
-<div>
-  <h1>Reg</h1>
-  <button (click)="loginPage()">Login</button>
-  <form action="">
-    <label for="" >email</label>
-    <input type="email"#email>
+<div class="conteiner">
 
-    <label for="" >name</label>
-    <input type="text" #name>
+    <button (click)="loginPage()" mat-flat-button color="primary"><span class="material-icons">
+      arrow_back_ios
+      </span>Login</button>
 
-    <label for="" >password</label>
-    <input type="password" #password>
+  <form #registerForm="ngForm" (ngSubmit)="register(registerForm)" class="form">
+    <h1>Register</h1>
 
-    <label for="" >repeat password</label>
-    <input type="password" #password2>
 
+
+    <mat-form-field class="example-full-width">
+      <mat-label for="email" ><span class="label">Email*</span></mat-label>
+      <input matInput type="email" name="email" id="email" ngModel class="input">
+    </mat-form-field>
+
+
+      <mat-form-field class="example-full-width">
+      <mat-label for="name" ><span class="label">name*</span></mat-label>
+      <input matInput type="text" name="name" id="name" ngModel class="input"/>
+    </mat-form-field>
+
+
+    <mat-form-field class="example-full-width">
+      <mat-label for="password" ><span class="label">password*</span></mat-label>
+      <input matInput type="password" name="password" id="password" ngModel class="input"/>
+    </mat-form-field>
+
+
+    <mat-form-field class="example-full-width">
+      <mat-label for="password2" ><span class="label">Repeat password*</span></mat-label>
+      <input matInput type="password" name="password2" id="password2" ngModel class="input"/>
+    </mat-form-field>
+
+
+    <button  mat-flat-button  color="primary" type="submit">Register</button>
   </form>
-  <button (click)="register({
-    email: email.value,
-    name: name.value,
-    password: password.value,
-    password2: password2.value
-    })">Regster</button>
 
+  <div class="logo"><img src="../../../../assets/whatsAppImg.png" alt="">  </div>
 </div>
+

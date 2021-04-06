@@ -17,15 +17,18 @@ export class RegisterComponent  {
   loginPage(){
     this._router.navigate(['/login'])
   }
-  register(values: any): void {
+  register(registerForm: any): void {
+    const values = registerForm.value
+
     if (values.password == values.password2) {
       this._auth.Register(values).subscribe(
         (data: any) => {
           if (data.error) {
-            alert(data.error);
             this._auth.UserStatus = false;
-
             localStorage.clear()
+
+            alert(data.error);
+
           } else {
 
             localStorage.setItem('token', data.token);
@@ -34,8 +37,7 @@ export class RegisterComponent  {
 
             this._router.navigate(['/']);
           }
-        },
-        (error: any) => {console.log(error)}
+        }
       );
 
     } else {

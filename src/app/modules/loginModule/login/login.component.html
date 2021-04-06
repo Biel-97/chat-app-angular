@@ -1,15 +1,30 @@
-<div>
-  <h1>Log</h1>
-  <button (click)="registerPage()">Register</button>
-  <form action="">
-    <label for="" >email</label>
-    <input type="email"#email>
-    <label for="" >password</label>
-    <input type="password" #password>
-  </form>
-  <button (click)="login({
-    email: email.value,
-    password: password.value}
-    )">Login</button>
+<div class="conteiner">
 
+    <button (click)="registerPage()" mat-flat-button color="primary">
+      Register<span class="material-icons">arrow_forward_ios</span></button>
+
+
+  <form  #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="form">
+
+
+    <h1>Login</h1>
+    <div>
+
+      <mat-form-field class="example-full-width">
+        <mat-label for="email" ><span class="label">Email</span></mat-label>
+        <input matInput type="email" name="email" id="email" ngModel class="input">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label for="password" ><span class="label">password</span></mat-label>
+        <input matInput type="password" name="password" id="password" ngModel class="input"/>
+      </mat-form-field>
+    </div>
+
+
+
+    <button  mat-flat-button  color="primary" type="submit">login</button>
+  </form>
+
+  <div class="logo"><img src="../../../../assets/whatsAppImg.png" alt="">  </div>
 </div>

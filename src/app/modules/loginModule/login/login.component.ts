@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['../register/register.component.css']
 })
 export class LoginComponent  {
 
@@ -21,12 +21,14 @@ export class LoginComponent  {
   }
 
   login(values:any): void{
-    this._auth.Login(values)
+
+    this._auth.Login(values.value)
     .subscribe(
       (data: any) => {
         if (data.error) {
         this._auth.UserStatus = false;
         localStorage.clear()
+        alert(data.error);
 
       } else {
         localStorage.setItem('token', data.token);
@@ -35,11 +37,9 @@ export class LoginComponent  {
 
         this._router.navigate(['/']);
       }
-    },
-      err=> {console.log(err)}
+    }
     )
-    // console.log(localStorage)
-    // localStorage.removeItem('error')
+
   }
 
 }

@@ -19,10 +19,16 @@
           <span>New Contact</span>
         </div>
 
-        <ul>
-          <li *ngFor="let contact of contactsList">
+        <ul class="contactList">
+
+          <button mat-raised-button *ngFor="let contact of contactsList" (click)="createChat(contact._id)">
             {{ contact.name }}
-          </li>
+          </button>
+
+          <button mat-raised-button *ngFor="let contact of contactsList">
+            {{ contact.name }}
+          </button>
+
         </ul>
       </div>
 

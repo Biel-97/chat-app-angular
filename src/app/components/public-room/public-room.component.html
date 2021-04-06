@@ -1,21 +1,38 @@
 <div class="public-Chat">
   <div class="Messages">
-    <ul>
-      <li class="myMessage"><span>Teste apenas </span><div><span>20:00</span><span>Eu Mesmo</span></div></li>
-      <li class="othersMessage"><span>Teste apenas2</span> <div><span>20:00</span><span>Ozoto</span></div></li>
-      <li class="botMessage"> <span>User JalimRabei Connected</span> <div><span>20:00</span></div></li>
-      <li class="othersMessage"><span>Teste apenas4</span> <div><span>20:00</span><span>Ozoto</span></div></li>
 
-      <li *ngFor="let msg of msgs">
-        {{ msg.UserName }}
-        {{ msg.message }}
+      <!-- <li class="myMessage">
+        <span>Eu Mesmo</span>
+        <span>Teste apenas </span>
       </li>
-    </ul>
+
+      <li class="othersMessage">
+        <span>Ozoto</span>
+        <span>Teste apenas2</span>
+      </li>
+
+      <li class="BotMessage">
+        <span>--Chat-Bot--</span>
+        <span>User  (( qualquer )) has been connected.</span>
+      </li> -->
+
+      <li *ngFor="let msg of msgs"
+      [class.myMessage]="msg.email == userInfo.email"
+      [class.othersMessage]="(msg.email == userInfo.email) == false"
+      [class.BotMessage]="msg.email == 'Chat-Bot'"
+
+      >
+      <span>
+        {{ msg.UserName }}
+      </span>
+      <span>
+        {{ msg.message }}
+      </span>
+      </li>
+
   </div>
-  <form action="">
-    <div class="chat-bottom">
+  <form class="chat-form">
       <input type="text" placeholder="Type a new message here..." #message>
-      <button (click)="sendMessage($event, message)">Send</button>
-    </div>
+      <button (click)="sendMessage($event, message)"><mat-icon>send</mat-icon></button>
   </form>
 </div>
