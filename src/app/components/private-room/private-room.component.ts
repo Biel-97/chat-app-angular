@@ -26,7 +26,7 @@ export class PrivateRoomComponent implements OnInit {
 
   ngOnInit(): void {
     this._callComponents.room_Id.subscribe((room_ID) => {
-      this.getChatMessages(room_ID);
+      this.getGroupMessages(room_ID);
       this._userInfo.room_ID = room_ID;
     });
     this._socketIO.listen('new message').subscribe((data: any) => {
@@ -51,8 +51,8 @@ export class PrivateRoomComponent implements OnInit {
   }
 
 
-  getChatMessages(id: string) {
-    this._callComponents.getChatMessages(id).subscribe((data: any) => {
+  getGroupMessages(id: string) {
+    this._callComponents.getGroupMessages(id).subscribe((data: any) => {
       console.log(data)
       this.chatMessages = data.messages;
     });

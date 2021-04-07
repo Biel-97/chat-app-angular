@@ -10,13 +10,13 @@ import { NewContactComponent } from '../new-contact/new-contact.component';
   styleUrls: ['./lobby.component.css'],
 })
 export class LobbyComponent implements OnInit {
-  rooms: object[] ;
-  contactsList: object[]
+  rooms: object[];
+  contactsList: object[];
 
   newgroup: boolean = false;
-  contacts: boolean = true;
+  contacts: boolean = false;
   getChats: boolean = true;
-
+  privateChats: []
   constructor(
     private _auth: AuthenticateService,
     private _callComponents: CallComponentsService,
@@ -33,51 +33,57 @@ export class LobbyComponent implements OnInit {
     });
     this._callComponents.showContacts.subscribe((show) => {
       this.contacts = show;
-
+      if (show) {
+        this._callComponents.getContacts().subscribe((data: any) => {
+          this.contactsList = data.User.contacts;
+          console.log(data)
+        });
+      }
     });
     this._callComponents.showRooms.subscribe((show) => {
-      this.getUserChats()
+      this.getUserChats();
       this.getChats = show;
     });
-    this._callComponents.getContacts().subscribe((data: any) => {
-      this.contactsList = data.User.contacts
-      console.log(data.User.contacts)
-    })
-    this.getUserChats()
 
+    this.getUserChats();
   }
 
   openDialogForm(): void {
     const dialogRef = this.dialog.open(NewContactComponent, {
-      width: '500px'
+      width: '500px',
     });
   }
-  cancelNewGroup(){
-    this._callComponents.showRooms.emit(true)
-    this._callComponents.showContacts.emit(false)
-    this._callComponents.showNewGroup.emit(false)
+  cancelNewGroup() {
+    this._callComponents.showRooms.emit(true);
+    this._callComponents.showContacts.emit(false);
+    this._callComponents.showNewGroup.emit(false);
   }
 
-  getUserChats(){
+  getUserChats() {
     this._auth.authenticate().subscribe((data: any) => {
-      if(data.error){
-        localStorage.clear()
-      }else{
-        console.log(data)
-        this.rooms = data.Rooms
-        this._callComponents.user_Name = data.name
+      if (data.error) {
+        localStorage.clear();
+      } else {
+        console.log(data.Rooms)
+        console.log(data.privateChatIds)
+        this.privateChats = data.privateChatIds
+        this.rooms = data.Rooms;
+        this._callComponents.user_Name = data.name;
+        this._callComponents.user_Email = data.email
       }
-    })
+    });
   }
 
-  getChatid(id: string){
+  getGroupId(id: string) {
     setTimeout(() => {
-      this._callComponents.getChatid(id)
-    }, 0)
+      this._callComponents.getGroupId(id);
+    }, 0);
   }
 
-  createChat(contactID){
-    console.log(contactID)
+  createPrivateChat(contactID) {
+    this._callComponents.addNewPrivateChat(contactID).subscribe((data:any) => {
+      console.log(data);
+      this.getGroupId(data.chatId)
+    });
   }
-
 }

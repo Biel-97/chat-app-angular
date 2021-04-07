@@ -21,20 +21,18 @@
 
         <ul class="contactList">
 
-          <button mat-raised-button *ngFor="let contact of contactsList" (click)="createChat(contact._id)">
+          <button mat-raised-button *ngFor="let contact of contactsList" (click)="createPrivateChat(contact)" [routerLink]="['/lobby/', contact.name]" >
             {{ contact.name }}
+            {{ contact.email }}
           </button>
 
-          <button mat-raised-button *ngFor="let contact of contactsList">
-            {{ contact.name }}
-          </button>
 
         </ul>
       </div>
 
       <div *ngIf="getChats" class="chats">
         <h3>CHATS</h3>
-        <li *ngFor="let salas of rooms" [routerLink]="['/lobby/', salas.name]" (click)="getChatid(salas.Room_id)" class="chat">
+        <li *ngFor="let salas of rooms" [routerLink]="['/lobby/', salas.name]" (click)="getGroupId(salas.Room_id)" class="chat">
           <span> {{ salas.name }} </span>
         </li>
       </div>

@@ -22,7 +22,7 @@ export class PublicRoomComponent implements OnInit {
       this.msgs.push(data)
     })
 
-    // this._socketIO.emitEvent('joinRoom', this.userInfo)
+    this._socketIO.emitEvent('joinRoom', this.userInfo)
 
     this._auth.authenticate().subscribe((data: any) => {
       this.userInfo.UserName = data.name

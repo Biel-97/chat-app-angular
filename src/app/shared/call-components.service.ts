@@ -8,11 +8,13 @@ export class CallComponentsService {
 
   constructor(private _http: HttpClient) { }
 
-  private _root: string = 'http://localhost:8080';
-  private _addContact: string = 'http://localhost:8080/addContact';
-  private _getcontact: string = 'http://localhost:8080/getContact';
-  private _newGroup: string = 'http://localhost:8080/newGroup';
-  private _groupMessages: string = 'http://localhost:8080/groupMessages';
+  private readonly _root: string = 'http://localhost:8080';
+  private readonly _addContact: string = 'http://localhost:8080/addContact';
+  private readonly _getcontact: string = 'http://localhost:8080/getContact';
+  private readonly _newGroup: string = 'http://localhost:8080/newGroup';
+  private readonly _groupMessages: string = 'http://localhost:8080/groupMessages';
+  private readonly _newPrivateChat: string = 'http://localhost:8080/private/newPrivateChat';
+  private readonly _getPrivateChat: string = 'http://localhost:8080/private/getPrivateChat';
 
   showNewGroup = new EventEmitter<boolean>();
   showContacts = new EventEmitter<boolean>();
@@ -21,14 +23,8 @@ export class CallComponentsService {
   room_Name = new EventEmitter<boolean>();
 
   user_Name:string
+  user_Email:string
 
-
-  callContacts(){
-    return this._http.post(this._root, {
-      token: `Bearer ${localStorage.token}`,
-      id: localStorage.User_id,
-    })
-  }
 
   addContacts( email:string){
     return this._http.post(this._addContact, {
@@ -54,7 +50,7 @@ export class CallComponentsService {
       room
     })
   }
-  getChatMessages(id: string){
+  getGroupMessages(id: string){
     return this._http.post(this._groupMessages, {
       token: `Bearer ${localStorage.token}`,
       id: localStorage.User_id,
@@ -63,8 +59,28 @@ export class CallComponentsService {
 
   }
 
-  getChatid(id: string){
+  getGroupId(id: string){
     this.room_Id.emit(id)
+  }
+
+  addNewPrivateChat(contactId: any){
+    return this._http.post(this._newPrivateChat, {
+      token: `Bearer ${localStorage.token}`,
+      id: localStorage.User_id,
+      contactId,
+      email: this.user_Email,
+      name: this.user_Name
+
+    })
+  }
+
+  getPrivateChats(chatId:any){
+
+    return this._http.post(this._getPrivateChat, {
+      token: `Bearer ${localStorage.token}`,
+      id: localStorage.User_id,
+      chatId
+    })
   }
 
 }
