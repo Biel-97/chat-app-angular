@@ -20,11 +20,13 @@ export class PrivateRoomComponent implements OnInit {
   ) {}
   chatMessages = [];
   whoSended: boolean;
+  groupDescription: string
 
    _userInfo: any = { User_ID: localStorage.getItem('User_id') };
   myid: string = this._userInfo.User_ID;
 
   ngOnInit(): void {
+
     this._callComponents.room_Id.subscribe((room_ID) => {
       this.getGroupMessages(room_ID);
       this._userInfo.room_ID = room_ID;
@@ -53,19 +55,21 @@ export class PrivateRoomComponent implements OnInit {
 
   getGroupMessages(id: string) {
     this._callComponents.getGroupMessages(id).subscribe((data: any) => {
-      console.log(data)
+      this.groupDescription = data.description
       this.chatMessages = data.messages;
+      document.querySelector('.MessagesList').scrollTop = document.querySelector('.MessagesList').scrollHeight
     });
   }
   sendMessage(event: any, message: any) {
+    event.preventDefault();
     if (message.value !== '') {
       this._userInfo.UserName = this._callComponents.user_Name;
 
-      event.preventDefault();
       this._userInfo.message = message.value;
       this._socketIO.emitEvent('new message', this._userInfo);
-      console.log(this._userInfo)
       message.value = '';
+      document.querySelector('.MessagesList').scrollTop = document.querySelector('.MessagesList').scrollHeight
+
     }
   }
 

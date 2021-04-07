@@ -43,69 +43,80 @@
         <span>Add Group</span>
         <span>ICON</span>
       </div>
+
+
+
+
       <div class="tittle">
-        <span *ngIf="!_editName">{{ groupDetails.roomName }}</span>
-        <input
+        <!-- <span *ngIf="!_editName">{{ groupDetails.roomName }}</span> -->
+
+        <!-- <input
           type="text"
           *ngIf="_editName"
           (input)="groupDetails.roomName = $event.target.value"
           value="{{ groupDetails.roomName }}"
-        />
-        <i (click)="editTitle()"
-          ><mat-icon aria-hidden="false"> create </mat-icon></i
+        /> -->
+      <mat-form-field >
+        <mat-label>title*</mat-label>
+        <input matInput placeholder="title"  (input)="groupDetails.roomName = $event.target.value" value="{{ groupDetails.roomName }}"/>
+      </mat-form-field>
+        <!-- <i (click)="editTitle()" -->
+        <i><mat-icon aria-hidden="false"> create </mat-icon></i
         >
       </div>
-      <span>Created today at 00:00</span>
+      <span>Created today at {{ createdAt }}</span>
+
     </div>
     <div class="desc-group">
       <div class="col">
         <div class="box">
           <h2>description</h2>
           <div class="description">
-            <span *ngIf="!_editDescription">
+            <!-- <span *ngIf="!_editDescription">
               {{ groupDetails.description }}
-            </span>
-            <input
+            </span> -->
+            <!-- <input
               type="text"
               value="{{ groupDetails.description }}"
               *ngIf="_editDescription"
               (input)="groupDetails.description = $event.target.value"
               value="{{ groupDetails.description }}"
-            />
+            /> -->
 
-            <i (click)="editDescription()">
-              <mat-icon aria-hidden="false"> create </mat-icon>
-            </i>
-            <div></div>
+
+            <mat-form-field >
+              <mat-label>description</mat-label>
+              <input matInput placeholder="description" (input)="groupDetails.description = $event.target.value" value="{{ groupDetails.description }}"/>
+            </mat-form-field>
+
+            <!-- <i (click)="editDescription()"> -->
+            <i> <mat-icon aria-hidden="false"> create </mat-icon> </i>
+
           </div>
         </div>
+
+
         <div class="box">
           <div class="mute">
             <span>Mute Notifications</span>
             <i>
-              <mat-icon
-                aria-hidden="false"
-                (click)="checkBox(true)"
-                *ngIf="MuteStatus"
-              >
-                check_box
-              </mat-icon>
-              <mat-icon
-                aria-hidden="false"
-                (click)="checkBox(false)"
-                *ngIf="!MuteStatus"
-              >
-                check_box_outline_blank
-              </mat-icon>
+              <mat-icon  aria-hidden="false" (click)="checkBox(true)"
+                *ngIf="MuteStatus">check_box </mat-icon>
+
+              <mat-icon  aria-hidden="false" (click)="checkBox(false)"
+                *ngIf="!MuteStatus" >check_box_outline_blank </mat-icon>
             </i>
           </div>
-          <div (click)="addMoreParticipants()">
+
+
+          <div (click)="addMoreParticipants()" class="addMoreParticipants">
             <span>
               <mat-icon>group_add</mat-icon>
             </span>
             <span> Add more participants </span>
           </div>
-          <div>
+
+          <div class="participantsList">
             <li *ngFor="let participants of participantsList">
               <span class="userIcon">
                 <mat-icon>account_circle</mat-icon>
@@ -116,9 +127,9 @@
             </li>
           </div>
         </div>
-        <div (click)="newGroupDone()">
-    <mat-icon>done</mat-icon>
-    </div>
+            <div (click)="newGroupDone()" class="newGroupDone">
+              <mat-icon>done</mat-icon>
+          </div>
       </div>
     </div>
   </div>

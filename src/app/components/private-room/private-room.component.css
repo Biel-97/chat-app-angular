@@ -7,37 +7,57 @@
 .chat-header {
   height: 80px;
   background: #EEEEEE;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 15px;
+  z-index: 2;
+}
+.chat-header > div:first-child >span:last-child {
+  font-size: 12px;
+  font-weight: 400;
+  color: gray;
+}
+.groupTools {
+  display: flex;
+  width: 80px;
+  justify-content: space-between;
+}
+.groupTools > span {
+  cursor: pointer;
+}
+form{
+  height: 90px;
 }
 .Messages{
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   background: #E4DCD9;
-  height: calc(100% - 130px);
+  height: calc(100% - 170px);
 }
 .Messages > ul {
   width: 100%;
   min-width: 500px;
-  height: 100%;
+  height: auto;
+  max-height: 100%;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  margin: 0;
-  padding: 5%;
+   align-items: center;
+  /*justify-content: flex-end;
+  margin: 0; */
+  padding: 5px;
 }
 .Messages > ul> li {
   list-style: none;
   margin: 10px 5px;
   display: flex;
-  height: 30px;
-  align-items: center;
+  flex-direction: column;
   max-width: 45%;
   min-width: 100px;
-  height: auto;
-  padding: 5px;
   text-align: justify;
-
+  padding: 10px;
 }
 
 .myMessage {
@@ -45,6 +65,11 @@
   align-self: flex-end;
   background: #DCF9C4;
   justify-content: space-between;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 10px;
+  align-items: flex-end;
+
 }
 .myMessage > span:first-child{
   /* background: red; */
@@ -56,12 +81,20 @@
   flex-direction: column;
   align-self: flex-start;
   background: white;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  align-items: flex-start;
+
 }
 .othersMessage > span {
   display: flex;
   align-self: flex-start;
-
 }
+.othersMessage > span:first-child{
+  font-size: 12px;
+}
+
 .othersMessage > div {
   display: flex;
   flex-direction: column;
@@ -81,11 +114,19 @@
 .chat-bottom{
   width: 100%;
   /* margin: 20px 5px; */
+  padding: 20px;
+  background: rgb(236 236 236);
 }
 .chat-bottom > input {
   width: 100%;
   height: 50px;
+  border-radius: 20px;
+  border: 1px solid rgb(0, 0, 0, 0.2);
+  outline: none;
+  padding-left: 20px;
+  font-size: 16px;
 }
 .chat-bottom > button {
   width: 80px;
+  display: none;
 }

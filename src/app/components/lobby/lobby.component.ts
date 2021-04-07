@@ -36,7 +36,6 @@ export class LobbyComponent implements OnInit {
       if (show) {
         this._callComponents.getContacts().subscribe((data: any) => {
           this.contactsList = data.User.contacts;
-          console.log(data)
         });
       }
     });
@@ -44,6 +43,11 @@ export class LobbyComponent implements OnInit {
       this.getUserChats();
       this.getChats = show;
     });
+    this._callComponents.newContact.subscribe((data) => {
+      this._callComponents.getContacts().subscribe((data: any) => {
+        this.contactsList = data.User.contacts;
+      });
+    })
 
     this.getUserChats();
   }
@@ -61,11 +65,11 @@ export class LobbyComponent implements OnInit {
 
   getUserChats() {
     this._auth.authenticate().subscribe((data: any) => {
+      console.log(data)
       if (data.error) {
         localStorage.clear();
       } else {
-        console.log(data.Rooms)
-        console.log(data.privateChatIds)
+
         this.privateChats = data.privateChatIds
         this.rooms = data.Rooms;
         this._callComponents.user_Name = data.name;
@@ -82,7 +86,6 @@ export class LobbyComponent implements OnInit {
 
   createPrivateChat(contactID) {
     this._callComponents.addNewPrivateChat(contactID).subscribe((data:any) => {
-      console.log(data);
       this.getGroupId(data.chatId)
     });
   }

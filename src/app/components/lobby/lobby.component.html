@@ -21,10 +21,14 @@
 
         <ul class="contactList">
 
-          <button mat-raised-button *ngFor="let contact of contactsList" (click)="createPrivateChat(contact)" [routerLink]="['/lobby/', contact.name]" >
-            {{ contact.name }}
-            {{ contact.email }}
-          </button>
+          <button *ngFor="let contact of contactsList"  [routerLink]="['/lobby/', contact.name]">
+            <div class="contactButton">
+              <span>{{ contact.name }}</span>
+              <span>{{ contact.email }}</span>
+            </div>
+            <i class="contactOptions"><mat-icon (click)="createPrivateChat(contact)">more_vert</mat-icon></i>
+            <!-- <app-contact-options ></app-contact-options> -->
+            </button>
 
 
         </ul>
@@ -33,7 +37,15 @@
       <div *ngIf="getChats" class="chats">
         <h3>CHATS</h3>
         <li *ngFor="let salas of rooms" [routerLink]="['/lobby/', salas.name]" (click)="getGroupId(salas.Room_id)" class="chat">
+          <i class="icon"><mat-icon>people</mat-icon> </i>
+
           <span> {{ salas.name }} </span>
+        </li>
+
+        <li *ngFor="let chat of privateChats" (click)="createPrivateChat(chat)" [routerLink]="['/lobby/', chat.name]" class="chat">
+          <i class="icon"><mat-icon>person</mat-icon> </i>
+
+        <span>{{ chat.name }}  </span>
         </li>
       </div>
 

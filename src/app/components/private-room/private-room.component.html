@@ -1,12 +1,24 @@
 <div class="private-chat">
-  <div class="chat-header">{{ this._userInfo.roomName }}</div>
+  <div class="chat-header">
+    <div>
+      <h4>  {{ this._userInfo.roomName }}  </h4>
+      <span>{{ groupDescription }}</span>
+    </div>
+    <div class="groupTools">
+      <span><mat-icon>more_vert</mat-icon></span>
+      <span><mat-icon>close</mat-icon></span>
+
+    </div>
+  </div>
   <div class="Messages">
-    <ul>
-      <li *ngFor="let msg of chatMessages"
+    <ul class="MessagesList">
+      <li *ngFor="let msg of chatMessages" class="msg"
        [class.myMessage]="msg.id == myid"
        [class.othersMessage]="(msg.id == myid) == false"
        >
-        {{ msg.message }}
+
+       <span *ngIf="(msg.id == myid) == false">{{ msg.name }}</span>
+        <span>{{ msg.message }}</span>
       </li>
 
     </ul>
@@ -14,8 +26,8 @@
   <form>
 
     <div class="chat-bottom">
-      <input type="text" placeholder="Type a new message here..." #message />
-      <button (click)="sendMessage($event, message)">Send</button>
+      <input type="text" placeholder="Type a message" #message />
+      <button type="submit" (click)="sendMessage($event, message)">Send</button>
     </div>
   </form>
 </div>

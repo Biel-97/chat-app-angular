@@ -35,6 +35,7 @@ export class NewContactComponent implements OnInit {
           this.contactStatus = data.error
         }else{
           this.cancelDialog()
+          this._callComponents.newContact.emit(true)
         }
       })
     }

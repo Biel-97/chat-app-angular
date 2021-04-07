@@ -11,8 +11,7 @@ import { Router } from '@angular/router';
 export class NewGroupComponent implements OnInit {
   constructor(
     private _callComponents: CallComponentsService,
-    private _auth: AuthenticateService,
-    private _route: Router
+    private _auth: AuthenticateService
   ) {}
 
   contactList: any
@@ -22,10 +21,22 @@ export class NewGroupComponent implements OnInit {
   _editName:boolean = false
   _editDescription: boolean = false
 
+  createdAt:string = this.formatAMPM(new Date)
+  formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+  }
+
 
   groupDetails: any = {
-    roomName: 'tittle ',
-    description: 'Group description.',
+    roomName: '',
+    description: '',
   };
 
   ngOnInit(): void {
@@ -89,24 +100,29 @@ export class NewGroupComponent implements OnInit {
 
   newGroupDone() {
     this._auth.authenticate().subscribe((user: any) => {
-      this.participantsList.push({
-        name: user.name,
-        email: user.email,
-        status: 'administrator',
-      });
+      if(this.groupDetails.roomName !== ''){
 
-      this.groupDetails.participants = this.participantsList;
-      this.groupDetails.creator = { name: user.name, email: user.email };
-      console.log(this.groupDetails)
-      this._callComponents.addNewGroup(this.groupDetails).subscribe((data: any) => {
-        if (data.error) {
-          alert(data.error);
-          this.back();
-        } else {
-          this.back();
-          this._route.navigate(['/lobby'])
-        }
-      });
+        this.participantsList.push({
+          name: user.name,
+          email: user.email,
+          status: 'administrator',
+        });
+
+        this.groupDetails.participants = this.participantsList;
+        this.groupDetails.creator = { name: user.name, email: user.email };
+
+        this._callComponents.addNewGroup(this.groupDetails).subscribe((data: any) => {
+          if (data.error) {
+            alert(data.error);
+            this.back();
+          } else {
+            this.back();
+            document.location.reload()
+          }
+        });
+      }else{
+        alert('group is without a name')
+      }
     });
   }
 

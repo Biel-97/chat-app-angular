@@ -42,6 +42,20 @@
   font-weight: 500;
   height: 60px;
   transition: 200ms;
+  padding-left: 15px;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+}
+.icon {
+  font-size: 40px;
+  width: 45px;
+  height: 40px;
+  border-radius: 100%;
+  background: gray;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
 }
 .chat > span {
   width: 100%;
@@ -54,7 +68,8 @@
   width: 20%;
   max-width: 400px;
   min-width: 300px;
-  border-right: 1px solid rgb(0, 0, 0, 0.3);
+  border-right: 1px solid rgb(0, 0, 0, 0.1);
+  overflow-y: auto;
 }
 
 .router-outlet {
@@ -92,6 +107,8 @@
   align-items: center;
   cursor: pointer;
   transition: 200ms;
+  padding-top: 15px;
+  padding-left: 15px;
 }
 .addContactButton:hover {
   background: rgb(0, 0, 0, 0.1);
@@ -103,14 +120,59 @@
   font-weight: 600;
   font-size: 18px;
 }
+
 .contactList {
   list-style: none;
   padding: 10px 0px 10px 0px;
+
 }
 .contactList > button {
-  padding: 10px;
   margin: 5px 0px;
   width: 100%;
-  display: flex;
   justify-content: flex-start;
+  position: relative;
+  border: none;
+  border-bottom: 1px solid rgb(212, 212, 212);
+  outline: none;
+  transition: 200ms;
+}
+.contactList >  button:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.contactButton {
+  height: 52px;
+  position: relative;
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: 15px;
+}
+.contactButton > span {
+  display: flex;
+  flex-direction: column;
+  height: 25px;
+  align-self: flex-start;
+}
+.contactButton > span:first-child{
+  font-size: 15px;
+}
+
+.contactButton > span:last-child{
+  font-size: 12px;
+  /* color: rgb(77, 77, 77); */
+  margin-top: 5px;
+  align-items: flex-start;
+  font-weight: 400;
+}
+
+.contactOptions {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  z-index: 2;
+}
+.contactOptions > .mat-icon {
+  cursor: pointer;
 }

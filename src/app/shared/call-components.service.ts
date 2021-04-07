@@ -21,7 +21,7 @@ export class CallComponentsService {
   showRooms = new EventEmitter<boolean>();
   room_Id = new EventEmitter<string>();
   room_Name = new EventEmitter<boolean>();
-
+  newContact= new EventEmitter<boolean>()
   user_Name:string
   user_Email:string
 
