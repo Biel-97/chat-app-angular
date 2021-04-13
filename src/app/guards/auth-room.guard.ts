@@ -16,7 +16,7 @@ import { AuthenticateService } from '../shared/authenticate.service';
     private _route: Router
   ){}
 
-  acessRoom:boolean
+  acessRoom:boolean = true
   canActivateChild(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot

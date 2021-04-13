@@ -20,17 +20,19 @@ export class PrivateRoomComponent implements OnInit {
   ) {}
   chatMessages = [];
   whoSended: boolean;
-  groupDescription: string
-
-   _userInfo: any = { User_ID: localStorage.getItem('User_id') };
+  GroupOrChat: boolean;
+  _userInfo: any = { User_ID: localStorage.getItem('User_id') };
   myid: string = this._userInfo.User_ID;
+  groupParticipants: object[]
 
   ngOnInit(): void {
+    this.getGroupMessages(this._callComponents.startRoomId)
 
-    this._callComponents.room_Id.subscribe((room_ID) => {
-      this.getGroupMessages(room_ID);
-      this._userInfo.room_ID = room_ID;
-    });
+      this._callComponents.room_Id.subscribe((room_ID) => {
+        this.groupParticipants = []
+        this.getGroupMessages(room_ID);
+        this._userInfo.room_ID = room_ID;
+      });
     this._socketIO.listen('new message').subscribe((data: any) => {
       this.chatMessages.push(data);
       if (data.User_ID == localStorage.getItem('User_id')) {
@@ -41,35 +43,39 @@ export class PrivateRoomComponent implements OnInit {
     });
 
     this._route.params.subscribe((data: any) => {
-
-      if(this._userInfo.roomName != data['id']){
+      if (this._userInfo.roomName != data['id']) {
         this._socketIO.emitEvent('exitRoom', this._userInfo);
         this._socketIO.emitEvent('joinRoom', this._userInfo);
-
         this._userInfo.roomName = data['id'];
       }
     });
-
   }
 
-
-  getGroupMessages(id: string) {
+  getGroupMessages(id: any) {
     this._callComponents.getGroupMessages(id).subscribe((data: any) => {
-      this.groupDescription = data.description
+      this._userInfo.groupDescription = data.description;
+      this._userInfo.room_ID = id;
+      console.log(this._userInfo);
       this.chatMessages = data.messages;
-      document.querySelector('.MessagesList').scrollTop = document.querySelector('.MessagesList').scrollHeight
+      document.querySelector(
+        '.MessagesList'
+      ).scrollTop = document.querySelector('.MessagesList').scrollHeight;
+      this.GroupOrChat = !!data.description;
     });
   }
   sendMessage(event: any, message: any) {
     event.preventDefault();
-    if (message.value !== '') {
+    if (message.value.trim() !== '') {
       this._userInfo.UserName = this._callComponents.user_Name;
 
       this._userInfo.message = message.value;
       this._socketIO.emitEvent('new message', this._userInfo);
       message.value = '';
-      document.querySelector('.MessagesList').scrollTop = document.querySelector('.MessagesList').scrollHeight
-
+      document.querySelector(
+        '.MessagesList'
+      ).scrollTop = document.querySelector('.MessagesList').scrollHeight;
+    } else {
+      message.value = '';
     }
   }
 
@@ -79,5 +85,36 @@ export class PrivateRoomComponent implements OnInit {
     } else {
       this.whoSended = false;
     }
+  }
+
+  exitChat() {
+    this._callComponents.exitPage.emit(false);
+    this._router.navigate(['/lobby']);
+    // document.location.reload()
+  }
+  getGroupParticipants() {
+    this._callComponents.getGroupParticipants(this._userInfo.room_ID).subscribe((data: object[]) => {
+      console.log(data)
+      this.groupParticipants = data
+    })
+  }
+
+  leaveGroup() {
+    this._callComponents.LeaveGroup(this._userInfo.room_ID).subscribe((data :any) => {
+      if(data.ok){
+        this._router.navigate(['/lobby'])
+        document.location.reload();
+      }
+    })
+  }
+  deleteContact() {
+    this._callComponents
+      .deleteContact(this._userInfo.room_ID)
+      .subscribe((data: any) => {
+        console.log(data);
+        if (data.ok) {
+          this.exitChat();
+        }
+      });
   }
 }

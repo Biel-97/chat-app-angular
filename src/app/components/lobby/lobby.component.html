@@ -1,34 +1,44 @@
-<div class="lobby">
-  <div class="column">
-    <div class="top-buttons">
-      <app-menu></app-menu>
-    </div>
-    <div class="newChats">
-      <div *ngIf="newgroup">
-        <app-new-group></app-new-group>
+
+  <div class="lobby">
+    <div class="column">
+      <div class="top-buttons">
+        <app-menu style="width: 100%;"></app-menu>
       </div>
-
-      <div *ngIf="contacts">
-        <button class="back" (click)="cancelNewGroup()">
-          <mat-icon>keyboard_backspace</mat-icon>
-          <span>Back</span>
-        </button>
-
-        <div class="addContactButton" (click)="openDialogForm()">
-          <mat-icon class="addContact" >person_add</mat-icon>
-          <span>New Contact</span>
+      <div class="newChats">
+        <div *ngIf="newgroup">
+          <app-new-group></app-new-group>
         </div>
 
-        <ul class="contactList">
+        <div *ngIf="contacts">
+          <button class="back" (click)="cancelNewGroup()">
+            <mat-icon>keyboard_backspace</mat-icon>
+            <span>Back</span>
+          </button>
 
-          <button *ngFor="let contact of contactsList"  [routerLink]="['/lobby/', contact.name]">
-            <div class="contactButton">
-              <span>{{ contact.name }}</span>
-              <span>{{ contact.email }}</span>
-            </div>
-            <i class="contactOptions"><mat-icon (click)="createPrivateChat(contact)">more_vert</mat-icon></i>
-            <!-- <app-contact-options ></app-contact-options> -->
-            </button>
+          <div class="addContactButton" (click)="openDialogForm()">
+            <mat-icon class="addContact" >person_add</mat-icon>
+            <span>New Contact</span>
+          </div>
+
+          <ul class="contactList">
+
+            <button *ngFor="let contact of contactsList" >
+              <div class="contactButton">
+                <span>{{ contact.name }}</span>
+                <span>{{ contact.email }}</span>
+              </div>
+            <!-- <i class="contactOptions"><mat-icon (click)="createPrivateChat(contact)">more_vert</mat-icon></i> -->
+            <i class="contactOptions">
+              <i mat-button [matMenuTriggerFor]="beforeMenu">
+                <mat-icon>more_vert</mat-icon>
+              </i>
+              <mat-menu #beforeMenu="matMenu" xPosition="after">
+                <button mat-menu-item (click)="createPrivateChat(contact)">Send a message</button>
+                <button mat-menu-item>Invite to a group</button>
+                <button mat-menu-item (click)="deleteContact(contact._id)">Delete contact</button>
+              </mat-menu>
+            </i>
+          </button>
 
 
         </ul>
@@ -42,14 +52,15 @@
           <span> {{ salas.name }} </span>
         </li>
 
-        <li *ngFor="let chat of privateChats" (click)="createPrivateChat(chat)" [routerLink]="['/lobby/', chat.name]" class="chat">
+        <li *ngFor="let chat of privateChats" [routerLink]="['/lobby/', chat.name]" (click)="createPrivateChat(chat)"  class="chat" >
           <i class="icon"><mat-icon>person</mat-icon> </i>
 
-        <span>{{ chat.name }}  </span>
+          <span>{{ chat.name }}  </span>
         </li>
       </div>
 
     </div>
   </div>
-  <router-outlet class="router-outlet"></router-outlet>
+  <app-lobby-screen *ngIf="!exitPage" class="homescreen"></app-lobby-screen>
+  <router-outlet class="router-outlet" *ngIf="exitPage"></router-outlet>
 </div>

@@ -100,7 +100,7 @@ export class NewGroupComponent implements OnInit {
 
   newGroupDone() {
     this._auth.authenticate().subscribe((user: any) => {
-      if(this.groupDetails.roomName !== ''){
+      if(this.groupDetails.roomName.trim().length >= 3 ){
 
         this.participantsList.push({
           name: user.name,
@@ -121,7 +121,7 @@ export class NewGroupComponent implements OnInit {
           }
         });
       }else{
-        alert('group is without a name')
+        alert('group name is too short')
       }
     });
   }

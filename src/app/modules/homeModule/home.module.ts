@@ -1,4 +1,4 @@
-import { ContactOptionsComponent } from './../../components/contact-options/contact-options.component';
+import { LobbyScreenComponent } from './../../components/lobby-screen/lobby-screen.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CallComponentsService } from './../../shared/call-components.service';
 import { NewGroupComponent } from './../../components/new-group/new-group.component';
@@ -26,7 +26,7 @@ import {MatInputModule} from '@angular/material/input';
     MenuComponent,
     NewGroupComponent,
     NewContactComponent,
-    ContactOptionsComponent
+    LobbyScreenComponent
   ],
   imports: [
     CommonModule,

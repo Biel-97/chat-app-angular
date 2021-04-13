@@ -48,14 +48,7 @@
 
 
       <div class="tittle">
-        <!-- <span *ngIf="!_editName">{{ groupDetails.roomName }}</span> -->
 
-        <!-- <input
-          type="text"
-          *ngIf="_editName"
-          (input)="groupDetails.roomName = $event.target.value"
-          value="{{ groupDetails.roomName }}"
-        /> -->
       <mat-form-field >
         <mat-label>title*</mat-label>
         <input matInput placeholder="title"  (input)="groupDetails.roomName = $event.target.value" value="{{ groupDetails.roomName }}"/>
@@ -72,24 +65,12 @@
         <div class="box">
           <h2>description</h2>
           <div class="description">
-            <!-- <span *ngIf="!_editDescription">
-              {{ groupDetails.description }}
-            </span> -->
-            <!-- <input
-              type="text"
-              value="{{ groupDetails.description }}"
-              *ngIf="_editDescription"
-              (input)="groupDetails.description = $event.target.value"
-              value="{{ groupDetails.description }}"
-            /> -->
-
 
             <mat-form-field >
               <mat-label>description</mat-label>
               <input matInput placeholder="description" (input)="groupDetails.description = $event.target.value" value="{{ groupDetails.description }}"/>
             </mat-form-field>
 
-            <!-- <i (click)="editDescription()"> -->
             <i> <mat-icon aria-hidden="false"> create </mat-icon> </i>
 
           </div>

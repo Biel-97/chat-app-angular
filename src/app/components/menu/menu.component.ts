@@ -29,4 +29,7 @@ export class MenuComponent implements OnInit {
     this._callComponents.showContacts.emit(true)
 
   }
+  backToIntroPage(){
+    this._router.navigate(['/'])
+  }
 }

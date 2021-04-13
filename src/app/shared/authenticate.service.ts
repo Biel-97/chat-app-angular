@@ -1,7 +1,6 @@
 import { Injectable, OnInit, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import User from '../User';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +8,7 @@ import User from '../User';
 export class AuthenticateService implements OnInit {
   UserStatus: boolean;
   root: string = 'http://localhost:8080';
-  authRoom: string = 'http://localhost:8080/authRoom';
+  authRoom: string = 'http://localhost:8080/group/authRoom';
 
   showHeaderEmitter = new EventEmitter<boolean>();
 

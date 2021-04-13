@@ -1,9 +1,18 @@
-.buttons > i{
-  margin: 0px 15px;
-}
-
 .buttons {
   margin-right: 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0px 15px;
+}
+.buttons > div> i{
+  margin: 0px 10px;
+}
+.buttons > i > .mat-icon{
+  font-size: 30px;
+}
+.buttons > div > i > .mat-icon{
+  cursor: pointer;
 }
 
 .buttons > i > .mat-icon {

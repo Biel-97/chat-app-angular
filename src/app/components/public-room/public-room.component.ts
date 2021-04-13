@@ -34,12 +34,13 @@ export class PublicRoomComponent implements OnInit {
 
   sendMessage(event:any, message:any){
     event.preventDefault()
-    if(message.value !==''){
+    if(message.value.trim() !==''){
       this.userInfo.message = message.value
       this._socketIO.emitEvent('new message', this.userInfo)
       message.value =''
     }else{
       console.log('Message is empty')
+      message.value =''
     }
   }
 

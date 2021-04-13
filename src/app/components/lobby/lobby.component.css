@@ -170,9 +170,10 @@
 .contactOptions {
   position: absolute;
   right: 5px;
-  bottom: 5px;
+  bottom: 10px;
   z-index: 2;
-}
-.contactOptions > .mat-icon {
   cursor: pointer;
+}
+.homescreen{
+  width:  80%;
 }

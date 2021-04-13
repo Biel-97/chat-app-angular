@@ -17,6 +17,7 @@ import { InfoComponent } from './components/info/info.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -9,19 +9,65 @@
   background: #EEEEEE;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   padding: 0px 15px;
   z-index: 2;
 }
-.chat-header > div:first-child >span:last-child {
+
+.nameDesc{
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  margin-right: 3px;
+  align-self: center;
+}
+
+.participants{
+  width: calc(100% - 280px);
+  padding: 3px 10px;
+  display: flex;
+  justify-items: start;
+  overflow-x: auto;
+}
+.participants > span {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid orange;
+  margin: 0px 10px;
+  align-items: center;
+  padding: 0px 10px;
+
+}
+.participants > span > .mat-icon {
+  font-size: 30px;
+  width: 35px;
+  height: 35px;
+  background: gray;
+  color: white;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+.participants > span > span:last-child{
   font-size: 12px;
   font-weight: 400;
   color: gray;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nameDesc >span:last-child {
+  font-size: 12px;
+  font-weight: 400;
+  color: gray;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .groupTools {
   display: flex;
   width: 80px;
   justify-content: space-between;
+  align-self: center;
 }
 .groupTools > span {
   cursor: pointer;
