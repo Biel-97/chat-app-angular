@@ -1,3 +1,4 @@
+import { DialogDeleteContactComponent } from './../dialog-delete-contact/dialog-delete-contact.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CallComponentsService } from './../../shared/call-components.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-lobby',
   templateUrl: './lobby.component.html',
-  styleUrls: ['./lobby.component.css'],
+  styleUrls: ['./lobby.component.css']
 })
 export class LobbyComponent implements OnInit {
   rooms: object[];
@@ -18,7 +19,12 @@ export class LobbyComponent implements OnInit {
   contacts: boolean = false;
   getChats: boolean = true;
   exitPage: boolean = false;
+  renderGroupInfo: boolean = false;
+  groupInfo: any
+  addContactStatus: string
+  userStatus: boolean
   privateChats: [];
+  currentGroup:string
   constructor(
     private _auth: AuthenticateService,
     private _callComponents: CallComponentsService,
@@ -61,6 +67,21 @@ export class LobbyComponent implements OnInit {
     });
 
     this.getUserChats();
+    this._callComponents.getGroupParticipantsList.subscribe((GroupId) => {
+      this._callComponents.getGroupParticipants(GroupId).subscribe((data: any) => {
+
+        this.groupInfo = data
+        this.newgroup = false;
+        this.contacts = false;
+        this.getChats = false;
+        this.renderGroupInfo = true
+        data.participants.forEach(element => {
+          if(element.email == this._callComponents.user_Email){
+            this.userStatus = element.status
+          }
+        });
+      })
+    })
   }
 
   openDialogForm(): void {
@@ -72,6 +93,7 @@ export class LobbyComponent implements OnInit {
     this._callComponents.showRooms.emit(true);
     this._callComponents.showContacts.emit(false);
     this._callComponents.showNewGroup.emit(false);
+    this.renderGroupInfo = false
   }
 
   getUserChats() {
@@ -92,10 +114,13 @@ export class LobbyComponent implements OnInit {
 
     this._callComponents.room_Id.emit(id);
     this._callComponents.exitPage.emit(true);
+    this.currentGroup = id
   }
 
   createPrivateChat(contactID) {
+    console.log(contactID)
     this._callComponents.addNewPrivateChat(contactID).subscribe((data: any) => {
+      console.log(data)
       this.getGroupId(data.chatId);
     });
   }
@@ -106,5 +131,45 @@ export class LobbyComponent implements OnInit {
         document.location.reload();
       }
     });
+  }
+  openDialogDeletContact(contactid) {
+    this._callComponents.startRoomId = contactid
+    const dialogRef = this.dialog.open(DialogDeleteContactComponent);
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log(`Dialog result: ${result}`);
+    // });
+  }
+  participantsSettings(participant){
+    console.log(participant.status)
+    console.log(this.userStatus)
+
+    // console.log(this.groupInfo.participants.status)
+  }
+  addContact(email){
+    console.log(email)
+    this._callComponents.addContacts(email).subscribe((data: any) => {
+      if(data.error){
+        alert(data.error)
+        this.addContactStatus = data.error
+      }else{
+        this._callComponents.newContact.emit(true)
+        this.addContactStatus = data.ok
+        alert(data.ok)
+      }
+    })
+  }
+  removefromgroup(person){
+    const contactEmail = person.email
+    this._callComponents.removefromgroup(this.currentGroup, contactEmail).subscribe((data:any) => {
+      if(data.error){
+        console.log(data.error)
+        this._callComponents.getGroupParticipants(this.currentGroup)
+      }else{
+        console.log(data)
+      }
+    });
+  }
+  InviteToGroup(contactId){
+    console.log(contactId)
   }
 }

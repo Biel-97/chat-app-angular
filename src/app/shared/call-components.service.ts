@@ -14,6 +14,7 @@ export class CallComponentsService {
   private readonly _deleteContact: string = 'http://localhost:8080/contact/deleteContact';
   private readonly _newGroup: string = 'http://localhost:8080/group/newGroup';
   private readonly _groupParticipants: string = 'http://localhost:8080/group/groupParticipants';
+  private readonly _removefromgroup: string = 'http://localhost:8080/group/removefromgroup';
   private readonly _leaveRoom: string = 'http://localhost:8080/group/leaveRoom';
   private readonly _groupMessages: string = 'http://localhost:8080/group/groupMessages';
   private readonly _newPrivateChat: string = 'http://localhost:8080/private/newPrivateChat';
@@ -25,6 +26,7 @@ export class CallComponentsService {
   room_Name = new EventEmitter<boolean>();
   exitPage= new EventEmitter<boolean>(false)
   newContact= new EventEmitter<boolean>()
+  getGroupParticipantsList= new EventEmitter<boolean>()
   user_Name:string
   user_Email:string
   startRoomId :String
@@ -94,6 +96,16 @@ export class CallComponentsService {
     return this._http.post(this._groupParticipants, {
       token: `Bearer ${localStorage.token}`,
       GroupID
+    })
+  }
+
+  removefromgroup(groupId:any, userEmail:string){
+    return this._http.post(this._removefromgroup, {
+      token: `Bearer ${localStorage.token}`,
+      id: localStorage.User_id,
+      groupId,
+      userEmail : this.user_Email,
+      contactEmail : userEmail
     })
   }
 

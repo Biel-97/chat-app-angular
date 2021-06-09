@@ -1,9 +1,11 @@
+import { DialogLeaveRoomComponent } from './../dialog-leave-room/dialog-leave-room.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { CallComponentsService } from './../../shared/call-components.service';
 import { SocketService } from './../../shared/socket.service';
 import { AuthenticateService } from 'src/app/shared/authenticate.service';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-private-room',
@@ -16,22 +18,22 @@ export class PrivateRoomComponent implements OnInit {
     private _callComponents: CallComponentsService,
     private _auth: AuthenticateService,
     private _route: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    public dialog: MatDialog
   ) {}
   chatMessages = [];
   whoSended: boolean;
   GroupOrChat: boolean;
   _userInfo: any = { User_ID: localStorage.getItem('User_id') };
   myid: string = this._userInfo.User_ID;
-  groupParticipants: object[]
 
   ngOnInit(): void {
     this.getGroupMessages(this._callComponents.startRoomId)
 
       this._callComponents.room_Id.subscribe((room_ID) => {
-        this.groupParticipants = []
         this.getGroupMessages(room_ID);
         this._userInfo.room_ID = room_ID;
+        this._callComponents.startRoomId = room_ID
       });
     this._socketIO.listen('new message').subscribe((data: any) => {
       this.chatMessages.push(data);
@@ -55,12 +57,11 @@ export class PrivateRoomComponent implements OnInit {
     this._callComponents.getGroupMessages(id).subscribe((data: any) => {
       this._userInfo.groupDescription = data.description;
       this._userInfo.room_ID = id;
-      console.log(this._userInfo);
       this.chatMessages = data.messages;
       document.querySelector(
         '.MessagesList'
       ).scrollTop = document.querySelector('.MessagesList').scrollHeight;
-      this.GroupOrChat = !!data.description;
+      this.GroupOrChat = data.description !== undefined
     });
   }
   sendMessage(event: any, message: any) {
@@ -93,28 +94,13 @@ export class PrivateRoomComponent implements OnInit {
     // document.location.reload()
   }
   getGroupParticipants() {
-    this._callComponents.getGroupParticipants(this._userInfo.room_ID).subscribe((data: object[]) => {
-      console.log(data)
-      this.groupParticipants = data
-    })
+    this._callComponents.getGroupParticipantsList.emit(this._userInfo.room_ID)
   }
 
-  leaveGroup() {
-    this._callComponents.LeaveGroup(this._userInfo.room_ID).subscribe((data :any) => {
-      if(data.ok){
-        this._router.navigate(['/lobby'])
-        document.location.reload();
-      }
-    })
-  }
-  deleteContact() {
-    this._callComponents
-      .deleteContact(this._userInfo.room_ID)
-      .subscribe((data: any) => {
-        console.log(data);
-        if (data.ok) {
-          this.exitChat();
-        }
-      });
+  openDialogLeaveRoom() {
+    const dialogRef = this.dialog.open(DialogLeaveRoomComponent);
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log(`Dialog result: ${result}`);
+    // });
   }
 }

@@ -4,13 +4,7 @@
       <h4>{{ this._userInfo.roomName }}</h4>
       <span>{{ this._userInfo.groupDescription }}</span>
     </div>
-    <div class="participants" >
-      <span *ngFor="let participants of groupParticipants">
-        <mat-icon>person</mat-icon>
-        <span> {{ participants.name }} </span>
-        <span> {{ participants.email }} </span>
-      </span>
-    </div>
+
     <div class="groupTools">
       <span>
         <i class="contactOptions" *ngIf="GroupOrChat">
@@ -18,14 +12,12 @@
             <mat-icon>more_vert</mat-icon>
           </i>
           <mat-menu #beforeMenu="matMenu" xPosition="after">
-            <button
-              mat-menu-item
-              *ngIf="GroupOrChat"
+            <button mat-menu-item
               (click)="getGroupParticipants()"
             >
-              Group Participants
+              Group Informations
             </button>
-            <button mat-menu-item *ngIf="GroupOrChat" (click)="leaveGroup()">
+            <button mat-menu-item (click)="openDialogLeaveRoom()">
               Leave Group
             </button>
           </mat-menu>

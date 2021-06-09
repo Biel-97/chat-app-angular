@@ -44,6 +44,7 @@
   transition: 200ms;
   padding-left: 15px;
   border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+  outline: none;
 }
 .icon {
   font-size: 40px;
@@ -126,7 +127,7 @@
   padding: 10px 0px 10px 0px;
 
 }
-.contactList > button {
+.contactList > div {
   margin: 5px 0px;
   width: 100%;
   justify-content: flex-start;
@@ -135,19 +136,21 @@
   border-bottom: 1px solid rgb(212, 212, 212);
   outline: none;
   transition: 200ms;
+  background: white;
+  display: flex;
+  flex-direction: column;
 }
-.contactList >  button:hover {
+.contactList >  div:hover {
   background: rgba(0, 0, 0, 0.1);
 }
 
 .contactButton {
-  height: 52px;
+  height: 60px;
   position: relative;
   margin-left: 5px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding-top: 15px;
 }
 .contactButton > span {
   display: flex;
@@ -156,12 +159,12 @@
   align-self: flex-start;
 }
 .contactButton > span:first-child{
-  font-size: 15px;
+  font-size: 18px;
 }
 
 .contactButton > span:last-child{
   font-size: 12px;
-  /* color: rgb(77, 77, 77); */
+  color: rgb(0, 0, 0, 0.8);
   margin-top: 5px;
   align-items: flex-start;
   font-weight: 400;
@@ -176,4 +179,62 @@
 }
 .homescreen{
   width:  80%;
+}
+.groupinfoHeader {
+  padding-left: 15px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+}
+.participant-list {
+  margin-top: 15px;
+}
+.participant {
+  display: flex;
+  position: relative;
+  list-style: none;
+  transition: 200ms;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.15) ;
+  height: 60px;
+  justify-content: space-between;
+  padding: 1px 10px;
+  cursor: pointer;
+}
+
+.participant:hover{
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.participant >  div:first-child {
+  display: flex;
+  flex-direction: column;
+  padding: 3px 8px;
+  max-width: 220px;
+  justify-content: center;
+}
+.participant > div:last-child {
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+}
+.participant >  div:first-child > span:first-child{
+  font-size: 18px;
+  color: black;
+}
+.participant >  div:first-child > span:last-child{
+  font-size: 12px;
+  color: rgb(0, 0, 0, 0.6);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.participantStatus {
+  background: green;
+  color: white;
+  border-radius: 3px;
+  padding: 3px 5px;
+  font-size: 16px;
+  height: 25px;
 }

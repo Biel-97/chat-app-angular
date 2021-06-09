@@ -1,3 +1,7 @@
+import { DialogParticipantSettingsComponent } from './../../components/dialog-participant-settings/dialog-participant-settings.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogDeleteContactComponent } from './../../components/dialog-delete-contact/dialog-delete-contact.component';
+import { DialogLeaveRoomComponent } from './../../components/dialog-leave-room/dialog-leave-room.component';
 import { LobbyScreenComponent } from './../../components/lobby-screen/lobby-screen.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CallComponentsService } from './../../shared/call-components.service';
@@ -15,6 +19,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { NewContactComponent } from 'src/app/components/new-contact/new-contact.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -26,7 +31,10 @@ import {MatInputModule} from '@angular/material/input';
     MenuComponent,
     NewGroupComponent,
     NewContactComponent,
-    LobbyScreenComponent
+    LobbyScreenComponent,
+    DialogLeaveRoomComponent,
+    DialogDeleteContactComponent,
+    DialogParticipantSettingsComponent
   ],
   imports: [
     CommonModule,
@@ -35,6 +43,8 @@ import {MatInputModule} from '@angular/material/input';
     MatIconModule,
     MatButtonModule,
     MatInputModule,
+    MatDialogModule,
+    MatTooltipModule
   ],
   exports: [
     HomeComponent
