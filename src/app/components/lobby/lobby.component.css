@@ -187,9 +187,7 @@
   flex-direction: column;
   border-bottom: 1px solid rgb(0, 0, 0, 0.1);
 }
-.participant-list {
-  margin-top: 15px;
-}
+
 .participant {
   display: flex;
   position: relative;
@@ -237,4 +235,17 @@
   padding: 3px 5px;
   font-size: 16px;
   height: 25px;
+}
+.AddContactInGroup {
+  margin: 0px 25px;
+  margin-left: 0;
+  font-weight: 600;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.AddContactInGroup> .mat-icon {
+  cursor: pointer;
 }

@@ -1,7 +1,7 @@
-import { DialogParticipantSettingsComponent } from './../../components/dialog-participant-settings/dialog-participant-settings.component';
+import { DialogParticipantSettingsComponent } from '../../components/dialog/dialog-participant-settings/dialog-participant-settings.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { DialogDeleteContactComponent } from './../../components/dialog-delete-contact/dialog-delete-contact.component';
-import { DialogLeaveRoomComponent } from './../../components/dialog-leave-room/dialog-leave-room.component';
+import { DialogDeleteContactComponent } from './../../components/dialog/dialog-delete-contact/dialog-delete-contact.component';
+import { DialogLeaveRoomComponent } from './../../components/dialog/dialog-leave-room/dialog-leave-room.component';
 import { LobbyScreenComponent } from './../../components/lobby-screen/lobby-screen.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CallComponentsService } from './../../shared/call-components.service';
@@ -16,7 +16,7 @@ import { HomeRoutingModule } from './home.routing.module'
 import { LobbyComponent } from 'src/app/components/lobby/lobby.component';
 import { MenuComponent } from '../../components/menu/menu.component';
 import {MatMenuModule} from '@angular/material/menu';
-import { NewContactComponent } from 'src/app/components/new-contact/new-contact.component';
+import { NewContactComponent } from '../../components/dialog/new-contact/new-contact.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -34,7 +34,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     LobbyScreenComponent,
     DialogLeaveRoomComponent,
     DialogDeleteContactComponent,
-    DialogParticipantSettingsComponent
+    DialogParticipantSettingsComponent,
   ],
   imports: [
     CommonModule,

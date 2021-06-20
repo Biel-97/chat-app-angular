@@ -1,9 +1,9 @@
-import { DialogDeleteContactComponent } from './../dialog-delete-contact/dialog-delete-contact.component';
+import { DialogDeleteContactComponent } from './../dialog/dialog-delete-contact/dialog-delete-contact.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CallComponentsService } from './../../shared/call-components.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticateService } from 'src/app/shared/authenticate.service';
-import { NewContactComponent } from '../new-contact/new-contact.component';
+import { NewContactComponent } from '../dialog/new-contact/new-contact.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,10 +19,11 @@ export class LobbyComponent implements OnInit {
   contacts: boolean = false;
   getChats: boolean = true;
   exitPage: boolean = false;
+  addContactGroup: boolean = false
   renderGroupInfo: boolean = false;
   groupInfo: any
   addContactStatus: string
-  userStatus: boolean
+  userStatus: string
   privateChats: [];
   currentGroup:string
   constructor(
@@ -64,6 +65,10 @@ export class LobbyComponent implements OnInit {
           this.contactsList = data.User.contacts;
         });
       }
+      this._callComponents.addContactGroup.subscribe((data) => {
+        this.addContactGroup = data
+      })
+
     });
 
     this.getUserChats();
@@ -92,7 +97,9 @@ export class LobbyComponent implements OnInit {
   cancelNewGroup() {
     this._callComponents.showRooms.emit(true);
     this._callComponents.showContacts.emit(false);
+    this._callComponents.addContactGroup.emit(false);
     this._callComponents.showNewGroup.emit(false);
+
     this.renderGroupInfo = false
   }
 
@@ -118,15 +125,12 @@ export class LobbyComponent implements OnInit {
   }
 
   createPrivateChat(contactID) {
-    console.log(contactID)
     this._callComponents.addNewPrivateChat(contactID).subscribe((data: any) => {
-      console.log(data)
       this.getGroupId(data.chatId);
     });
   }
   deleteContact(contactID) {
     this._callComponents.deleteContact(contactID).subscribe((data: any) => {
-      console.log(data);
       if (data.ok) {
         document.location.reload();
       }
@@ -149,6 +153,7 @@ export class LobbyComponent implements OnInit {
     console.log(email)
     this._callComponents.addContacts(email).subscribe((data: any) => {
       if(data.error){
+        console.log(data)
         alert(data.error)
         this.addContactStatus = data.error
       }else{
@@ -162,14 +167,39 @@ export class LobbyComponent implements OnInit {
     const contactEmail = person.email
     this._callComponents.removefromgroup(this.currentGroup, contactEmail).subscribe((data:any) => {
       if(data.error){
-        console.log(data.error)
-        this._callComponents.getGroupParticipants(this.currentGroup)
+        alert(data)
       }else{
-        console.log(data)
+        this._callComponents.getGroupParticipants(this.currentGroup)
       }
     });
   }
   InviteToGroup(contactId){
-    console.log(contactId)
+
+    if(this.userStatus == 'administrator'){
+      this._callComponents.AddIngroup(this.currentGroup, contactId).subscribe((data:any) => {
+        if(data.error){
+          alert(data.error)
+        }else{
+          this.addParticipants(false)
+        }
+      })
+    }else{
+      alert('Only administrators can add new participants to the group.')
+    }
+  }
+  addParticipants(status: boolean){
+    if(status){
+      this._callComponents.showRooms.emit(false);
+      this._callComponents.showNewGroup.emit(false);
+      this._callComponents.showContacts.emit(true);
+      this._callComponents.addContactGroup.emit(true)
+      this.renderGroupInfo = false
+    }else{
+      this._callComponents.showRooms.emit(false);
+      this._callComponents.showNewGroup.emit(false);
+      this._callComponents.showContacts.emit(false);
+      this._callComponents.addContactGroup.emit(true)
+      this.renderGroupInfo = true
+    }
   }
 }

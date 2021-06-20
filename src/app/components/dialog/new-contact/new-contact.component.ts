@@ -1,4 +1,4 @@
-import { CallComponentsService } from './../../shared/call-components.service';
+import { CallComponentsService } from '../../../shared/call-components.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 

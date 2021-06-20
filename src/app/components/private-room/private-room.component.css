@@ -67,12 +67,22 @@ form{
   margin: 10px 5px;
   display: flex;
   flex-direction: column;
-  max-width: 45%;
-  min-width: 100px;
   text-align: justify;
   padding: 10px;
-}
+  min-width: 100px;
 
+}
+.Messages > ul > li > span:last-child {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+  white-space: pre-wrap;      /* CSS3 */
+  white-space: -moz-pre-wrap; /* Firefox */
+  white-space: -pre-wrap;     /* Opera <7 */
+  white-space: -o-pre-wrap;   /* Opera 7 */
+  word-wrap: break-word;      /* IE */
+  max-width: 450px;
+}
 .myMessage {
   display: flex;
   align-self: flex-end;
@@ -100,10 +110,7 @@ form{
   align-items: flex-start;
 
 }
-.othersMessage > span {
-  display: flex;
-  align-self: flex-start;
-}
+
 .othersMessage > span:first-child{
   font-size: 12px;
 }

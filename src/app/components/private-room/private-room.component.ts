@@ -1,4 +1,4 @@
-import { DialogLeaveRoomComponent } from './../dialog-leave-room/dialog-leave-room.component';
+import { DialogLeaveRoomComponent } from '../dialog/dialog-leave-room/dialog-leave-room.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -92,6 +92,7 @@ export class PrivateRoomComponent implements OnInit {
     this._callComponents.exitPage.emit(false);
     this._router.navigate(['/lobby']);
     // document.location.reload()
+
   }
   getGroupParticipants() {
     this._callComponents.getGroupParticipantsList.emit(this._userInfo.room_ID)
@@ -103,4 +104,5 @@ export class PrivateRoomComponent implements OnInit {
     //   console.log(`Dialog result: ${result}`);
     // });
   }
+
 }

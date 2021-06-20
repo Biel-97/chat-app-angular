@@ -48,6 +48,7 @@ export class NewGroupComponent implements OnInit {
   cancelNewGroup() {
     this._callComponents.showRooms.emit(true);
     this._callComponents.showContacts.emit(false);
+    this._callComponents.addContactGroup.emit(false)
     this._callComponents.showNewGroup.emit(false);
     this.goNextStep = false;
     for (var i = 0; i <= this.participantsList.length; i++) {
@@ -136,6 +137,8 @@ export class NewGroupComponent implements OnInit {
     this.goNextStep = false;
     this._callComponents.showRooms.emit(true);
     this._callComponents.showContacts.emit(false);
+    this._callComponents.addContactGroup.emit(false);
+
     this._callComponents.showNewGroup.emit(false);
   }
   addMoreParticipants(){

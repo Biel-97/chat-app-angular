@@ -8,6 +8,7 @@
   display: flex;
   flex-direction: column;
   padding: 15px;
+  overflow-y: auto;
 }
 .Messages > li {
   color: white;
@@ -19,7 +20,6 @@
   height: 30px;
   align-items: center;
   max-width: 45%;
-  min-width: 100px;
   height: auto;
   padding: 5px;
   text-align: justify;
@@ -34,6 +34,17 @@
   border-bottom-right-radius: 15px;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px ;
+}
+.Messages > li > span:last-child {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+  white-space: pre-wrap;      /* CSS3 */
+  white-space: -moz-pre-wrap; /* Firefox */
+  white-space: -pre-wrap;     /* Opera <7 */
+  white-space: -o-pre-wrap;   /* Opera 7 */
+  word-wrap: break-word;      /* IE */
+  max-width: 450px;
 }
 .myMessage > span:first-child{
   margin-bottom: 3px;

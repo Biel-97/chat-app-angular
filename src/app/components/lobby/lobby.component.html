@@ -14,7 +14,7 @@
           <span>Back</span>
         </button>
 
-        <div class="addContactButton" (click)="openDialogForm()">
+        <div class="addContactButton" (click)="openDialogForm()" *ngIf="!addContactGroup">
           <mat-icon class="addContact">person_add</mat-icon>
           <span>New Contact</span>
         </div>
@@ -77,6 +77,9 @@
         <h2>{{ groupInfo.roomName }}</h2>
         <span>{{ groupInfo.description }}</span>
         <h4>Created at: {{ groupInfo.createdAt | date:'MMM d, y' }}</h4>
+        <span class="AddContactInGroup"><mat-icon class="addContact" (click)="addParticipants(true)">person_add</mat-icon>
+          Add New Participant
+        </span>
       </div>
       <div class="participant-list">
         <li

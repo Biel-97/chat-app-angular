@@ -20,6 +20,7 @@ export class MenuComponent implements OnInit {
   createNewGroup(){
     this._callComponents.showRooms.emit(false)
     this._callComponents.showContacts.emit(false)
+    this._callComponents.addContactGroup.emit(false)
     this._callComponents.showNewGroup.emit(true)
   }
 
@@ -27,6 +28,7 @@ export class MenuComponent implements OnInit {
     this._callComponents.showRooms.emit(false)
     this._callComponents.showNewGroup.emit(false)
     this._callComponents.showContacts.emit(true)
+    this._callComponents.addContactGroup.emit(false);
 
   }
   backToIntroPage(){
