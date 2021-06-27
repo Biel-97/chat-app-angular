@@ -15,6 +15,8 @@ export class CallComponentsService {
   private readonly _newGroup: string = 'http://localhost:8080/group/newGroup';
   private readonly _groupParticipants: string = 'http://localhost:8080/group/groupParticipants';
   private readonly _removefromgroup: string = 'http://localhost:8080/group/removefromgroup';
+  private readonly _changeGroupInfo: string = 'http://localhost:8080/group/changeGroupInfo';
+  private readonly _concedAdmAtatus: string = 'http://localhost:8080/group/concedAdmAtatus';
   private readonly _AddIngroup: string = 'http://localhost:8080/group/addingroup';
   private readonly _leaveRoom: string = 'http://localhost:8080/group/leaveRoom';
   private readonly _groupMessages: string = 'http://localhost:8080/group/groupMessages';
@@ -27,8 +29,9 @@ export class CallComponentsService {
   room_Name = new EventEmitter<boolean>();
   exitPage= new EventEmitter<boolean>(false)
   newContact= new EventEmitter<boolean>()
-  getGroupParticipantsList= new EventEmitter<boolean>()
+  getGroupParticipantsList= new EventEmitter<String>()
   getNewGroupParticipant= new EventEmitter<boolean>()
+  renderGroupInfo= new EventEmitter<boolean>()
   addContactGroup= new EventEmitter<boolean>()
   user_Name:string
   user_Email:string
@@ -113,12 +116,25 @@ export class CallComponentsService {
   }
 
   AddIngroup(groupId:any, userId:string){
-    console.log('indo...')
     return this._http.post(this._AddIngroup, {
       token: `Bearer ${localStorage.token}`,
       id: localStorage.User_id,
       groupId,
       userId,
+    })
+  }
+  changeGroupInfo(groupInfo:any){
+    return this._http.post(this._changeGroupInfo, {
+      token: `Bearer ${localStorage.token}`,
+      id: localStorage.User_id,
+      groupInfo,
+    })
+  }
+  concedAdmAtatus(participantInfo:any){
+    return this._http.post(this._concedAdmAtatus, {
+      token: `Bearer ${localStorage.token}`,
+      id: localStorage.User_id,
+      participantInfo,
     })
   }
 

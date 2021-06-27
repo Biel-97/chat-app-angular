@@ -25,6 +25,7 @@ export class LobbyComponent implements OnInit {
   addContactStatus: string
   userStatus: string
   privateChats: [];
+  groupInfoInicio: any ={}
   currentGroup:string
   constructor(
     private _auth: AuthenticateService,
@@ -33,6 +34,9 @@ export class LobbyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this._callComponents.renderGroupInfo.subscribe(data => {
+      this.renderGroupInfo = data
+    })
     setTimeout(() => {
       this._auth.showHeaderEmitter.emit(false);
     }, 0);
@@ -76,10 +80,12 @@ export class LobbyComponent implements OnInit {
       this._callComponents.getGroupParticipants(GroupId).subscribe((data: any) => {
 
         this.groupInfo = data
+        this.groupInfoInicio.groupDesc = data.description+ ''
+        this.groupInfoInicio.GroupId = GroupId+ ''
         this.newgroup = false;
         this.contacts = false;
         this.getChats = false;
-        this.renderGroupInfo = true
+        this._callComponents.renderGroupInfo.emit(true)
         data.participants.forEach(element => {
           if(element.email == this._callComponents.user_Email){
             this.userStatus = element.status
@@ -100,11 +106,12 @@ export class LobbyComponent implements OnInit {
     this._callComponents.addContactGroup.emit(false);
     this._callComponents.showNewGroup.emit(false);
 
-    this.renderGroupInfo = false
+    this._callComponents.renderGroupInfo.emit(false)
   }
 
   getUserChats() {
     this._auth.authenticate().subscribe((data: any) => {
+      console.log(data.Rooms)
       if (data.error) {
         localStorage.clear();
       } else {
@@ -143,12 +150,7 @@ export class LobbyComponent implements OnInit {
     //   console.log(`Dialog result: ${result}`);
     // });
   }
-  participantsSettings(participant){
-    console.log(participant.status)
-    console.log(this.userStatus)
 
-    // console.log(this.groupInfo.participants.status)
-  }
   addContact(email){
     console.log(email)
     this._callComponents.addContacts(email).subscribe((data: any) => {
@@ -167,9 +169,9 @@ export class LobbyComponent implements OnInit {
     const contactEmail = person.email
     this._callComponents.removefromgroup(this.currentGroup, contactEmail).subscribe((data:any) => {
       if(data.error){
-        alert(data)
+        alert(data.error)
       }else{
-        this._callComponents.getGroupParticipants(this.currentGroup)
+        this._callComponents.getGroupParticipantsList.emit(this.currentGroup)
       }
     });
   }
@@ -177,9 +179,11 @@ export class LobbyComponent implements OnInit {
 
     if(this.userStatus == 'administrator'){
       this._callComponents.AddIngroup(this.currentGroup, contactId).subscribe((data:any) => {
+        console.log(data)
         if(data.error){
           alert(data.error)
         }else{
+          this._callComponents.getGroupParticipantsList.emit(this.currentGroup)
           this.addParticipants(false)
         }
       })
@@ -188,18 +192,44 @@ export class LobbyComponent implements OnInit {
     }
   }
   addParticipants(status: boolean){
+    console.log(this.groupInfo.description == '')
     if(status){
       this._callComponents.showRooms.emit(false);
       this._callComponents.showNewGroup.emit(false);
       this._callComponents.showContacts.emit(true);
       this._callComponents.addContactGroup.emit(true)
-      this.renderGroupInfo = false
+      this._callComponents.renderGroupInfo.emit(false)
     }else{
       this._callComponents.showRooms.emit(false);
       this._callComponents.showNewGroup.emit(false);
       this._callComponents.showContacts.emit(false);
       this._callComponents.addContactGroup.emit(true)
-      this.renderGroupInfo = true
+      this._callComponents.renderGroupInfo.emit(true)
+    }
+  }
+  concedAdmStatus(participant){
+    const info = participant
+    info.groupId = this.groupInfoInicio.GroupId
+    this._callComponents.concedAdmAtatus(info).subscribe((data) => {
+      document.location.reload()
+    })
+  }
+
+
+  onSubmit(event: any) {
+    const data = event.value
+    data.GroupId = this.groupInfoInicio.GroupId
+
+    if( event.value.groupDesc !== this.groupInfoInicio.groupDesc ){
+      if(event.value.groupDesc.length <= 70){
+
+        this._callComponents.changeGroupInfo(data).subscribe(() => {
+          document.location.reload();
+
+        })
+      }else{
+        alert('Description its too long.(MAX 70 letters).')
+      }
     }
   }
 }

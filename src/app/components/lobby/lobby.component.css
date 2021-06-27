@@ -11,6 +11,11 @@
   height: 80px;
   background: #EEEEEE;
   margin-bottom: 15px;
+  position: fixed;
+  top: 0;
+  width: 20%;
+  max-width: 400px;
+  min-width: 300px;
 }
 .top-buttons > span {
   margin: 0px 15px;
@@ -22,12 +27,16 @@
   overflow-y: auto;
   height: calc(100% - 80px);
 }
+.newChats{
+  margin-top: 90px;
+}
 .newChats > li {
   margin: 15px 5px;
 }
 .chats {
   padding: 0px;
   width: 100%;
+  margin-top: 90px;
 }
 .chats > h3{
   margin-left: 15px;
@@ -71,6 +80,7 @@
   min-width: 300px;
   border-right: 1px solid rgb(0, 0, 0, 0.1);
   overflow-y: auto;
+  position: relative;
 }
 
 .router-outlet {
@@ -180,14 +190,22 @@
 .homescreen{
   width:  80%;
 }
-.groupinfoHeader {
+.groupInfo  {
+  margin-top: 90px;
+}
+.groupinfoHeader >form > div:first-child {
   padding-left: 15px;
   position: relative;
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid rgb(0, 0, 0, 0.1);
 }
-
+.groupinfoHeader >form > div:first-child h3 {
+  margin-bottom: 0;
+}
+.groupinfoHeader > h4 {
+  margin-left: 25px;
+}
 .participant {
   display: flex;
   position: relative;
@@ -237,15 +255,66 @@
   height: 25px;
 }
 .AddContactInGroup {
-  margin: 0px 25px;
-  margin-left: 0;
   font-weight: 600;
   font-size: 18px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  transition: 100ms ease-in-out;
+  cursor: pointer;
+  margin-bottom: 10px;
+  border-bottom: 1px solid black;
+  padding-bottom: 5px;
 }
 
-.AddContactInGroup> .mat-icon {
+.AddContactInGroup:hover {
+  background: rgb(0, 0, 0, 0.2);
+}
+
+.nameGroupShow > input {
+  color: black!important;
+  font-size: 20px!important;
+  /* font-weight: 500; */
+}
+.nameGroupHide > input{
+  color: black!important;
+  font-size: 20px!important;
+  /* font-weight: 500; */
+}
+.descGroupShow > input{
+  /* font-weight: 500; */
+  color: black!important;
+  font-size: 16px!important;
+}
+.descGroupHide > input {
+  /* font-weight: 500; */
+  color: black!important;
+  font-size: 16px!important;
+}
+.edit {
+  margin: 0px 10px;
+  border-radius: 100%;
+  padding: 14px;
+  display: flex;
+  background: green;
+  color: white;
+  align-self: center;
+}
+.editButton {
+  font-weight: 600;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  transition: 100ms ease-in-out;
   cursor: pointer;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  background: white;
+  width: 100%;
+  border: none;
+}
+
+.editButton:hover{
+  background: rgb(0, 0, 0, 0.2);
 }

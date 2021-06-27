@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { DenyLoginGuard } from './guards/deny-login.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { TokenInterceptorService } from './shared/token-interceptor.service';
@@ -31,7 +32,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     HomeModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule
     ],
   providers: [ AuthGuard, AuthenticateService, DenyLoginGuard,
   {

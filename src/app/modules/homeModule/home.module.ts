@@ -20,6 +20,7 @@ import { NewContactComponent } from '../../components/dialog/new-contact/new-con
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -44,7 +45,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatButtonModule,
     MatInputModule,
     MatDialogModule,
-    MatTooltipModule
+    MatTooltipModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   exports: [
     HomeComponent

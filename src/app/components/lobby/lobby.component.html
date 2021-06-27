@@ -74,18 +74,51 @@
         <span>Back</span>
       </button>
       <div class="groupinfoHeader">
-        <h2>{{ groupInfo.roomName }}</h2>
-        <span>{{ groupInfo.description }}</span>
+
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form">
+
+          <div>
+
+
+            <mat-form-field class="example-full-width">
+              <mat-label>Group Name</mat-label>
+              <h3 *ngIf='userStatus=="administrator"' class="nameGroupShow">
+                <input matInput disabled name="groupName" [(ngModel)]=groupInfo.roomName>
+              </h3>
+
+              <h3 *ngIf='userStatus!="administrator"' class="nameGroupHide">
+                <input matInput disabled name="groupName" [(ngModel)]=groupInfo.roomName>
+              </h3>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <mat-label>Group Description</mat-label>
+              <span *ngIf='userStatus=="administrator"' class="descGroupShow" >
+                <input matInput name="groupDesc" [(ngModel)]=groupInfo.description>
+              </span>
+              <span *ngIf='userStatus!="administrator"' class="descGroupHide">
+                <input matInput disabled name="groupDesc" [(ngModel)]=groupInfo.description>
+              </span>
+            </mat-form-field>
+
+          </div>
+          <button *ngIf='userStatus=="administrator"' class="editButton" type="submit">
+            Edit group description
+            <i  class="edit" ><mat-icon class="material-icons-outlined" >edit</mat-icon></i>
+
+          </button>
+        </form>
         <h4>Created at: {{ groupInfo.createdAt | date:'MMM d, y' }}</h4>
-        <span class="AddContactInGroup"><mat-icon class="addContact" (click)="addParticipants(true)">person_add</mat-icon>
-          Add New Participant
-        </span>
       </div>
+      <span class="AddContactInGroup"(click)="addParticipants(true)" *ngIf='userStatus=="administrator"'>
+
+        Add New Participant
+        <mat-icon class="addContact" >person_add</mat-icon>
+      </span>
       <div class="participant-list">
         <li
           *ngFor="let participants of groupInfo.participants"
           class="participant"
-          (click)="participantsSettings(participants)"
           mat-button
         >
           <div>
@@ -102,7 +135,9 @@
               yPosition="below"
             >
               <button mat-menu-item (click)="addContact(participants.email)">Add Contact</button>
-              <button mat-menu-item *ngIf="userStatus" (click)="removefromgroup(participants)">remove Contact</button>
+
+              <button mat-menu-item *ngIf="userStatus == 'administrator'" (click)="removefromgroup(participants)">remove Contact</button>
+              <button mat-menu-item *ngIf="userStatus == 'administrator'" (click)="concedAdmStatus(participants)">conced administrator status</button>
             </mat-menu>
             <span
               class="participantStatus"

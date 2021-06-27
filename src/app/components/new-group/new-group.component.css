@@ -223,7 +223,6 @@
 .contactList > li > div {
   width: 80%;
   border-bottom: 1px solid rgb(0, 0, 0, 0.15);
-  margin-left: 20px;
   display: flex;
   align-items: center;
   height: 60px;
@@ -232,9 +231,7 @@
   display: flex;
   align-items: center;
 }
-.contactList > li > div> span:last-child{
-  margin-left: 20px;
-}
+
 .contactList > li > div> span:first-child{
   color: gray;
 }
@@ -242,7 +239,6 @@
 .contactList > span {
   color: rgb(81, 143, 142);
   font-weight: 900;
-  margin-left: 30px;
   font-size: 16px;
 }
 

@@ -1,6 +1,7 @@
 .public-Chat {
   height: calc(100% - 80px);
   position: relative;
+  background: red;
 }
 
 .Messages {
@@ -19,7 +20,6 @@
   flex-direction: column;
   height: 30px;
   align-items: center;
-  max-width: 45%;
   height: auto;
   padding: 5px;
   text-align: justify;

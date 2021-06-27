@@ -30,11 +30,11 @@ export class PrivateRoomComponent implements OnInit {
   ngOnInit(): void {
     this.getGroupMessages(this._callComponents.startRoomId)
 
-      this._callComponents.room_Id.subscribe((room_ID) => {
-        this.getGroupMessages(room_ID);
-        this._userInfo.room_ID = room_ID;
-        this._callComponents.startRoomId = room_ID
-      });
+    this._callComponents.room_Id.subscribe((room_ID) => {
+      this.getGroupMessages(room_ID);
+      this._userInfo.room_ID = room_ID;
+      this._callComponents.startRoomId = room_ID
+    });
     this._socketIO.listen('new message').subscribe((data: any) => {
       this.chatMessages.push(data);
       if (data.User_ID == localStorage.getItem('User_id')) {
@@ -55,6 +55,7 @@ export class PrivateRoomComponent implements OnInit {
 
   getGroupMessages(id: any) {
     this._callComponents.getGroupMessages(id).subscribe((data: any) => {
+      console.log()
       this._userInfo.groupDescription = data.description;
       this._userInfo.room_ID = id;
       this.chatMessages = data.messages;
@@ -95,6 +96,13 @@ export class PrivateRoomComponent implements OnInit {
 
   }
   getGroupParticipants() {
+    // group Informations
+    console.log('group Informations')
+    // this._callComponents.showRooms.emit(false)
+    // this._callComponents.showContacts.emit(false)
+    // this._callComponents.addContactGroup.emit(false)
+    // this._callComponents.showNewGroup.emit(false)
+
     this._callComponents.getGroupParticipantsList.emit(this._userInfo.room_ID)
   }
 
