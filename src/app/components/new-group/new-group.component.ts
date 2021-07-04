@@ -66,7 +66,6 @@ export class NewGroupComponent implements OnInit {
     for(var i = 0; i < this.contactList.length; i++){
       if(this.contactList[i].email == email){
         this.contactList.splice(i, 1)
-        // console.log(this.contactList[i])
       }
     }
   }

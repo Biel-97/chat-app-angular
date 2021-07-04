@@ -40,7 +40,6 @@ export class DialogDeleteContactComponent implements OnInit {
     this._callComponents
       .deleteContact(this._callComponents.startRoomId)
       .subscribe((data: any) => {
-        console.log(data);
         if (data.ok) {
           this.exitChat();
         }

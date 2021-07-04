@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class MenuComponent implements OnInit {
 
+  getContact:boolean = true
   constructor(
     private _router: Router,
     private _callComponents: CallComponentsService
@@ -31,6 +32,7 @@ export class MenuComponent implements OnInit {
     this._callComponents.showContacts.emit(true)
     this._callComponents.addContactGroup.emit(false);
     this._callComponents.renderGroupInfo.emit(false)
+    this._callComponents.getContactAddSituation.emit(false)
 
   }
   backToIntroPage(){

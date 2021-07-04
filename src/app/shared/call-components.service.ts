@@ -33,6 +33,7 @@ export class CallComponentsService {
   getNewGroupParticipant= new EventEmitter<boolean>()
   renderGroupInfo= new EventEmitter<boolean>()
   addContactGroup= new EventEmitter<boolean>()
+  getContactAddSituation= new EventEmitter<boolean>()
   user_Name:string
   user_Email:string
   startRoomId :String
@@ -84,7 +85,6 @@ export class CallComponentsService {
   }
 
   deleteContact(privateChatId:any){
-    console.log(privateChatId)
     return this._http.post(this._deleteContact, {
       token: `Bearer ${localStorage.token}`,
       id: localStorage.User_id,

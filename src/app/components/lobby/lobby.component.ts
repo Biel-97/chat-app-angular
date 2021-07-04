@@ -21,6 +21,7 @@ export class LobbyComponent implements OnInit {
   exitPage: boolean = false;
   addContactGroup: boolean = false
   renderGroupInfo: boolean = false;
+  renderContactAddSituation: boolean = false;
   groupInfo: any
   addContactStatus: string
   userStatus: string
@@ -49,7 +50,6 @@ export class LobbyComponent implements OnInit {
       if (show) {
         this._callComponents.getContacts().subscribe((data: any) => {
           this.contactsList = data.User.contacts;
-          console.log(data);
         });
       }
     });
@@ -91,7 +91,12 @@ export class LobbyComponent implements OnInit {
             this.userStatus = element.status
           }
         });
+        this._callComponents.getContactAddSituation.emit(true)
+
       })
+    })
+    this._callComponents.getContactAddSituation.subscribe(data => {
+      this.renderContactAddSituation = data
     })
   }
 
@@ -111,7 +116,6 @@ export class LobbyComponent implements OnInit {
 
   getUserChats() {
     this._auth.authenticate().subscribe((data: any) => {
-      console.log(data.Rooms)
       if (data.error) {
         localStorage.clear();
       } else {
@@ -146,16 +150,12 @@ export class LobbyComponent implements OnInit {
   openDialogDeletContact(contactid) {
     this._callComponents.startRoomId = contactid
     const dialogRef = this.dialog.open(DialogDeleteContactComponent);
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log(`Dialog result: ${result}`);
-    // });
+
   }
 
   addContact(email){
-    console.log(email)
     this._callComponents.addContacts(email).subscribe((data: any) => {
       if(data.error){
-        console.log(data)
         alert(data.error)
         this.addContactStatus = data.error
       }else{
@@ -179,7 +179,6 @@ export class LobbyComponent implements OnInit {
 
     if(this.userStatus == 'administrator'){
       this._callComponents.AddIngroup(this.currentGroup, contactId).subscribe((data:any) => {
-        console.log(data)
         if(data.error){
           alert(data.error)
         }else{
@@ -192,7 +191,6 @@ export class LobbyComponent implements OnInit {
     }
   }
   addParticipants(status: boolean){
-    console.log(this.groupInfo.description == '')
     if(status){
       this._callComponents.showRooms.emit(false);
       this._callComponents.showNewGroup.emit(false);

@@ -23,8 +23,6 @@ export class NavHeaderComponent implements OnInit {
     this._router.navigate(['/login'])
   }
   ngOnInit(): void {
-    // console.log(this.tokenError)
-    // console.log(localStorage)
 
   }
 

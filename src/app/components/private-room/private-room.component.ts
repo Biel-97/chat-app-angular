@@ -42,6 +42,9 @@ export class PrivateRoomComponent implements OnInit {
       } else {
         this.whoSended = false;
       }
+      document.querySelector(
+        '.MessagesList'
+      ).scrollTop = document.querySelector('.MessagesList').scrollHeight;
     });
 
     this._route.params.subscribe((data: any) => {
@@ -55,7 +58,6 @@ export class PrivateRoomComponent implements OnInit {
 
   getGroupMessages(id: any) {
     this._callComponents.getGroupMessages(id).subscribe((data: any) => {
-      console.log()
       this._userInfo.groupDescription = data.description;
       this._userInfo.room_ID = id;
       this.chatMessages = data.messages;
@@ -97,7 +99,6 @@ export class PrivateRoomComponent implements OnInit {
   }
   getGroupParticipants() {
     // group Informations
-    console.log('group Informations')
     // this._callComponents.showRooms.emit(false)
     // this._callComponents.showContacts.emit(false)
     // this._callComponents.addContactGroup.emit(false)
@@ -108,9 +109,7 @@ export class PrivateRoomComponent implements OnInit {
 
   openDialogLeaveRoom() {
     const dialogRef = this.dialog.open(DialogLeaveRoomComponent);
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log(`Dialog result: ${result}`);
-    // });
+
   }
 
 }

@@ -33,7 +33,7 @@
                 <button mat-menu-item (click)="createPrivateChat(contact)">
                   Send a message
                 </button>
-                <button mat-menu-item (click)="InviteToGroup(contact._id)">Invite to a group</button>
+                <button mat-menu-item (click)="InviteToGroup(contact._id)" *ngIf="renderContactAddSituation">Invite to a group</button>
                 <button mat-menu-item
                   (click)="openDialogDeletContact(contact._id)"
                 >

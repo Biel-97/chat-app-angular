@@ -20,6 +20,9 @@ export class PublicRoomComponent implements OnInit {
   ngOnInit(): void {
     this._socketIO.listen('new message').subscribe((data) => {
       this.msgs.push(data)
+      document.querySelector(
+        '.Messages'
+      ).scrollTop = document.querySelector('.Messages').scrollHeight;
     })
 
     this._socketIO.emitEvent('joinRoom', this.userInfo)

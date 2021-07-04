@@ -17,9 +17,12 @@ header > li {
   align-items: center;
   width: 80px;
   padding: 0px 5px;
-  border-left:  1px solid rgb(0, 0, 0);
-  border-right:  1px solid black;
   color: white;
   font-weight: 700;
   font-size: large;
+
+}
+header > li:hover {
+  text-decoration: underline;
+
 }
