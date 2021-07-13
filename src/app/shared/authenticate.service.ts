@@ -7,8 +7,10 @@ import { Router } from '@angular/router';
 })
 export class AuthenticateService implements OnInit {
   UserStatus: boolean;
-  root: string = 'http://localhost:8080';
-  authRoom: string = 'http://localhost:8080/group/authRoom';
+  // _BackEndRoot: string = 'http://localhost:8080'
+  _BackEndRoot: string = 'https://whatsapp-back-clone.herokuapp.com';
+
+  authRoom: string = this._BackEndRoot+ '/group/authRoom';
 
   showHeaderEmitter = new EventEmitter<boolean>();
 
@@ -25,11 +27,11 @@ export class AuthenticateService implements OnInit {
   }
 
   Register(value: object) {
-    return this._http.post(this.root +'/auth/register', value)
+    return this._http.post(this._BackEndRoot +'/auth/register', value)
   }
 
   Login(value: object) {
-    return this._http.post(this.root + '/auth/login', value)
+    return this._http.post(this._BackEndRoot + '/auth/login', value)
   }
 
   loggedIn(){
@@ -46,7 +48,7 @@ export class AuthenticateService implements OnInit {
   }
 
   authenticate() {
-    return this._http.post(this.root, {
+    return this._http.post(this._BackEndRoot, {
       token: `Bearer ${localStorage.token}`,
       id: localStorage.User_id,
     })

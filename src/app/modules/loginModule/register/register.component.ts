@@ -40,8 +40,6 @@ export class RegisterComponent  {
         }
       );
 
-    } else {
-      console.log('erro, senhas incompativeis');
     }
   }
 }

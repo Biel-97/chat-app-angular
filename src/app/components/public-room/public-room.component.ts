@@ -42,7 +42,6 @@ export class PublicRoomComponent implements OnInit {
       this._socketIO.emitEvent('new message', this.userInfo)
       message.value =''
     }else{
-      console.log('Message is empty')
       message.value =''
     }
   }

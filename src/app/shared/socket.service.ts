@@ -10,7 +10,9 @@ export class SocketService {
   socket_Client: any
 
   constructor() {
-    this.socket_Client = io.io('http://localhost:8080/')
+    // let _BackEndRoot = 'http://localhost:8080'
+    let _BackEndRoot = 'https://whatsapp-back-clone.herokuapp.com'
+    this.socket_Client = io.io(_BackEndRoot)
     }
 
   listen(event: string): any{

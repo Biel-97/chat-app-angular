@@ -7,20 +7,20 @@ import { Injectable, EventEmitter } from '@angular/core';
 export class CallComponentsService {
 
   constructor(private _http: HttpClient) { }
-
-  private readonly _root: string = 'http://localhost:8080';
-  private readonly _addContact: string = 'http://localhost:8080/contact/addContact';
-  private readonly _getcontact: string = 'http://localhost:8080/contact/getContact';
-  private readonly _deleteContact: string = 'http://localhost:8080/contact/deleteContact';
-  private readonly _newGroup: string = 'http://localhost:8080/group/newGroup';
-  private readonly _groupParticipants: string = 'http://localhost:8080/group/groupParticipants';
-  private readonly _removefromgroup: string = 'http://localhost:8080/group/removefromgroup';
-  private readonly _changeGroupInfo: string = 'http://localhost:8080/group/changeGroupInfo';
-  private readonly _concedAdmAtatus: string = 'http://localhost:8080/group/concedAdmAtatus';
-  private readonly _AddIngroup: string = 'http://localhost:8080/group/addingroup';
-  private readonly _leaveRoom: string = 'http://localhost:8080/group/leaveRoom';
-  private readonly _groupMessages: string = 'http://localhost:8080/group/groupMessages';
-  private readonly _newPrivateChat: string = 'http://localhost:8080/private/newPrivateChat';
+  //  private readonly _BackEndRoot: string = 'http://localhost:8080'
+  private readonly _BackEndRoot: string = 'https://whatsapp-back-clone.herokuapp.com'
+  private readonly _addContact: string = this._BackEndRoot + '/contact/addContact';
+  private readonly _getcontact: string = this._BackEndRoot + '/contact/getContact';
+  private readonly _deleteContact: string = this._BackEndRoot + '/contact/deleteContact';
+  private readonly _newGroup: string = this._BackEndRoot + '/group/newGroup';
+  private readonly _groupParticipants: string = this._BackEndRoot + '/group/groupParticipants';
+  private readonly _removefromgroup: string = this._BackEndRoot + '/group/removefromgroup';
+  private readonly _changeGroupInfo: string = this._BackEndRoot + '/group/changeGroupInfo';
+  private readonly _concedAdmAtatus: string = this._BackEndRoot + '/group/concedAdmAtatus';
+  private readonly _AddIngroup: string = this._BackEndRoot + '/group/addingroup';
+  private readonly _leaveRoom: string = this._BackEndRoot + '/group/leaveRoom';
+  private readonly _groupMessages: string = this._BackEndRoot + '/group/groupMessages';
+  private readonly _newPrivateChat: string = this._BackEndRoot + '/private/newPrivateChat';
 
   showNewGroup = new EventEmitter<boolean>();
   showContacts = new EventEmitter<boolean>();

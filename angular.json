@@ -120,6 +120,12 @@
               "devServerTarget": "chat:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref":"/Whatsapp-Clone/"
+          }
         }
       }
     }
