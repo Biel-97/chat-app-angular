@@ -45,8 +45,6 @@ module.exports = {
 <P><strong>OBS:.&nbsp;</strong> if your back-end url its in other port, you will have to change in this variable. by default, in this example, will be 8080.</P>
 <p>
 
-<strong>REACT_APP_SERVER_URL </strong> <i>---- </i>this url its the back-end server. if your back-end url its in other port, you will have to config this variable.<br>
-
 
 <h2>Built With</h2>
 <span>• Angular Js </span><br>
