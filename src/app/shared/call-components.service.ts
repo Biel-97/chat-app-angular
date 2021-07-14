@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
+import {BACK_END_URL} from '../../../env.js'
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +8,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 export class CallComponentsService {
 
   constructor(private _http: HttpClient) { }
-  //  private readonly _BackEndRoot: string = 'http://localhost:8080'
-  private readonly _BackEndRoot: string = 'https://whatsapp-back-clone.herokuapp.com'
+  private readonly _BackEndRoot: string = BACK_END_URL
   private readonly _addContact: string = this._BackEndRoot + '/contact/addContact';
   private readonly _getcontact: string = this._BackEndRoot + '/contact/getContact';
   private readonly _deleteContact: string = this._BackEndRoot + '/contact/deleteContact';

@@ -5,6 +5,7 @@
   flex-direction: row;
   justify-content: space-around;
   flex-wrap: wrap;
+  min-height: 700px;
 }
 .home > span {
   width: 45%;

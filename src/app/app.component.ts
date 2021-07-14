@@ -22,7 +22,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-
     this.authenticateService.showHeaderEmitter.subscribe(
       show => {
         this.ShowHeader = show

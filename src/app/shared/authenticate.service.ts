@@ -1,14 +1,14 @@
 import { Injectable, OnInit, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import {BACK_END_URL} from '../../../env.js'
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticateService implements OnInit {
   UserStatus: boolean;
-  // _BackEndRoot: string = 'http://localhost:8080'
-  _BackEndRoot: string = 'https://whatsapp-back-clone.herokuapp.com';
+  _BackEndRoot: string = BACK_END_URL
 
   authRoom: string = this._BackEndRoot+ '/group/authRoom';
 

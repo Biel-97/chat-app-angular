@@ -1,6 +1,7 @@
 import axios from 'axios';
-    // let _BackEndRoot = 'http://localhost:8080'
-    let _BackEndRoot = 'https://whatsapp-back-clone.herokuapp.com'
+import {BACK_END_URL} from '../../../env.js'
+
+    let _BackEndRoot = BACK_END_URL
 
 const api = axios.create({
     baseURL: _BackEndRoot
